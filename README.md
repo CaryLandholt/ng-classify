@@ -1,7 +1,7 @@
 [![NPM version](https://badge.fury.io/js/ng-classify.png)](http://badge.fury.io/js/ng-classify)
 [![dependency status](https://david-dm.org/CaryLandholt/ng-classify.png)](https://david-dm.org/CaryLandholt/ng-classify)
 
-# ng-classify [![Build Status](https://secure.travis-ci.org/CaryLandholt/gulp-ng-classify.png)](http://travis-ci.org/CaryLandholt/gulp-ng-classify)
+# ng-classify [![Build Status](https://secure.travis-ci.org/CaryLandholt/ng-classify.png)](http://travis-ci.org/CaryLandholt/ng-classify)
 
 > Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules
 
@@ -61,9 +61,15 @@ Plus, the name of the app has been removed from the file.  It is now configurabl
 ### Config
 
 ```CoffeeScript
-class MyInterceptor extends Config
-	constructor: ($httpProvider) ->
-		$httpProvider.interceptors.push 'MyInterceptor'
+class Routes extends Config
+	constructor: ($routeProvider) ->
+		$routeProvider
+		.when '/home',
+			controller: 'homeController'
+		.when '/about',
+			controller: 'aboutController'
+		.otherwise
+			redirectTo: '/home'
 ```
 
 ### Run
