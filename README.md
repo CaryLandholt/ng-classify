@@ -72,12 +72,49 @@ class Routes extends Config
 			redirectTo: '/home'
 ```
 
+compiles to
+
+```JavaScript
+angular.module('app').config(['$routeProvider', function ($routeProvider) {
+	$routeProvider
+	.when('/home', {controller: 'homeController'})
+	.when('/about', {controller: 'aboutController'})
+	.otherwise({redirectTo: '/home'});
+}]);
+```
+
+### Controller
+```CoffeeScript
+class Cool extends Controller
+	constructor: (coolService) ->
+		@coolDown = (whatToCool) ->
+			coolService.coolItDown whatToCool
+```
+
+compiles to
+
+```JavaScript
+angular.module('app').controller('coolController', ['coolService', function (coolService) {
+	this.coolDown = function (whatToCool) {
+		coolService.coolItDown(whatToCool);
+	};
+}]);
+```
+
 ### Run
 
 ```CoffeeScript
 class ViewsBackend extends Run
 	constructor: ($httpBackend) ->
 		$httpBackend.whenGET(/^.*\.(html|htm)$/).passThrough()
+```
+
+compiles to
+
+```JavaScript
+angular.module('app').run(['$httpBackend', function ($httpBackend) {
+	$httpBackend.whenGET(/^.*\.(html|htm)$/).passThrough();
+}]);
 ```
 
 ## Install
