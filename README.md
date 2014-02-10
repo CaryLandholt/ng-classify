@@ -30,6 +30,8 @@
 	- [Value](#Value)
 * [Install](#install)
 * [Examples](#examples)
+	- [CoffeeScript](#coffeescript)
+	- [JavaScript](#javascript)
 * [API](#api)
 
 ## Overview
