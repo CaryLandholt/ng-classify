@@ -8,7 +8,15 @@
 ## Table of Contents
 
 * [Overview](#overview)
-* [Module Types](#moduletypes)
+	- [Why?](#why)
+	- [How?](#how)
+	- [CoffeeScript classes](#coffeescript-classes)
+	- [Benefits](#benefits)
+	- [Considerations](#considerations)
+	- [Limitations](#limitations)
+	- [Controller As Syntax](#controller-as-syntax)
+* [Naming Conventions](#naming-conventions)
+* [Module Types](#module-types)
 	- [Animation](#animation)
 	- [Config](#config)
 	- [Constant](#constant)
@@ -18,6 +26,7 @@
 	- [Filter](#filter)
 	- [Provider](#provider)
 	- [Run](#run)
+	- [Service](#service)
 	- [Value](#Value)
 * [Install](#install)
 * [Examples](#examples)
@@ -25,56 +34,168 @@
 
 ## Overview
 
-[AngularJS](http://angularjs.org/) is well suited to take advantage of the terse [CoffeeScript class](http://coffeescript.org/#classes) syntax.
+[AngularJS](http://angularjs.org/) is well suited to take advantage of the [CoffeeScript class](http://coffeescript.org/#classes) syntax.
 However there's still a bit of boilerplate code we have to work through.
 ng-classify makes it easy.
 
-Take the following AngularJS module written in JavaScript.
+Here's how you write a controller using ng-classify
+
+```coffee
+class My extends Controller
+	constructor: ($scope, someService) ->
+		$scope.coolMethod = someService.coolMethod()
+```
+
+which is equivalent to
 
 ```javascript
-angular.module({appName}).controller('coolController', ['coolService', function (coolService) {
-	this.coolDown = function (whatToCool) {
-		coolService.coolItDown(whatToCool);
-	};
+angular.module('app').controller('myController', ['$scope', 'someService', function ($scope, someService) {
+	$scope.coolMethod = someService.coolMethod();
 }]);
 ```
 
-Now let's convert it to CoffeeScript
+### Why?
 
-```coffee
-angular.module({appName}).controller 'coolController', ['coolService', (coolService) ->
-	@coolDown = (whatToCool) ->
-		coolService.coolItDown whatToCool
-]
+Take the following typical AngularJS controller declaration
+
+```javascript
+angular.module('app').controller('myController', ['$scope', 'someService', function ($scope, someService) {
+	$scope.coolMethod = someService.coolMethod();
+}]);
 ```
 
-Not a tremendous amount of improvement, but hey, at least it's CoffeeScript.
+So what's wrong with this?
 
-Let's now convert the main function to a CoffeeScript class.
+* App name, `angular.module('app').controller`, is required within the declaration
+	- some avoid this by the use of a global variable, `app.controller`, which is not good JavaScript hygiene
+* Parameter names are duplicated, one for the getters, `'$scope', 'someService'`, and one for the function parameters, `function ($scope, someService)`
+	- this duplication is required to make the module minifiable
+	- some avoid this by the use of [ngmin](https://github.com/btford/ngmin)
+* Depending upon employed naming convention, modyle type, `controller`, and module name, `myController`, have duplication
+* The function is anonymous (unnamed), making it more difficult to debug
+* Generally verbose
 
-```coffee
-class coolController
-	constructor: (coolService) ->
-		@coolDown = (whatToCool) ->
-			coolService.coolItDown whatToCool
+### How?
 
-angular.module({appName}).controller 'coolController', ['coolService', coolController]
-```
-
-So we've actually added a few lines of code.  Plus we're still dealing with some duplication, like AngularJS DI annotations.
-Also, aren't CoffeeScript classes supposed to be capitalized by convention?
-
-Now let's take advantage of ng-classify.
+Write AngularJS modules using the following syntax.
+NOTE: `{{placeholder}}` denotes placeholders
 
 ```coffee
-class Cool extends Controller
-	constructor: (coolService) ->
-		@coolDown = (whatToCool) ->
-			coolService.coolItDown whatToCool
+class {{appName}} extends {{Animation|Config|Controller|Directive|Factory|Filter|Provider|Run|Service}}
+	constructor: ({{params}}) ->
+		# module body here
 ```
 
-Now there's no need to accomodate the AngularJS DI annotation, or use the word controller in a couple places, or mangle naming conventions.
-Plus, the name of the app has been removed from the file.  It is now configurable.
+or
+
+```coffee
+class {{name}} extends {{Constant|Value}}
+	@constructor = {{value}}
+```
+
+### CoffeeScript Classes
+
+The typical way to use CoffeeScript classes with AngularJS is as follows.
+
+```coffee
+class MyController
+	constructor: ($scope, someService) ->
+		$scope.coolMethod = someService.coolMethod()
+
+angular.module('app').controller 'myController', ['$scope', 'someService', MyController]
+```
+
+which is equivalent to
+
+```javascript
+angular.module('app').controller('myController', ['$scope', 'someService', function MyController($scope, someService) {
+	$scope.coolMethod = someService.coolMethod();
+}]);
+```
+
+with ng-classify, this is all you need
+
+```coffee
+class My extends Controller
+	constructor: ($scope, someService) ->
+		$scope.coolMethod = someService.coolMethod()
+```
+
+### Benefits
+
+* App name is not required when writing a module
+	- it is now configurable
+* Parameters are included once via the `constructor` function
+* No need to suffix the module name with the module type, e.g. my*Controller*
+* The function is named, making debugging more convenient
+* The syntax is arguably concise
+
+### Considerations
+
+* To avoid the use of global variables, it is advised to use the `bare: false` CoffeeScript compilation option.  see [CoffeeScript Usage](http://coffeescript.org/#usage)
+
+### Limitations
+
+* One class per file
+
+### Controller As Syntax
+
+AngularJS provides two styles for writing and consuming controller
+1. `$scope`
+2. `this` with `Controller as`
+
+`$scope` example
+
+```coffee
+class My extends Controller
+	constructor: ($scope, someService) ->
+		$scope.coolMethod = someService.coolMethod()
+```
+
+view for `$scope` example
+
+```html
+<div ng-controller="myController">
+	<button ng-click="coolMethod()">Cool It Down!</button>
+</div>
+```
+
+`this` example
+
+```coffee
+class My extends Controller
+	constructor: (someService) ->
+		@coolMethod = someService.coolMethod()
+```
+
+view for `this` example
+
+```html
+<div ng-controller="myController as controller">
+	<button ng-click="controller.coolMethod()">Cool It Down!</button>
+</div>
+```
+
+**The examples below use the `this` syntax**
+
+## Naming Conventions
+
+The following naming conventions are used.
+NOTE: *ClassName* is used as the example class name
+
+Module Type | Rendered Module Name
+--- | ---
+Animation | .class-name
+Config | *n/a*
+Constant | CLASS_NAME
+Controller | classNameController
+Directive | className
+Factory | ClassName
+Filter | className
+Provider | classNameProvider
+Run | *n/a*
+Service | classNameService
+Value | className
 
 ## Module Types
 
@@ -514,7 +635,7 @@ npm install --save-dev ng-classify
 
 ```coffee
 ngClassify = require 'ng-classify'
-coffeeScriptClass = '{CoffeeScript Class as a String}'
+coffeeScriptClass = '{{CoffeeScript Class as a String}}'
 angularModule = ngClassify coffeeScriptClass
 ```
 
@@ -522,7 +643,7 @@ angularModule = ngClassify coffeeScriptClass
 
 ```javascript
 var ngClassify = require('ng-classify');
-var coffeeScriptClass = '{CoffeeScript Class as a String}';
+var coffeeScriptClass = '{{CoffeeScript Class as a String}}';
 var angularModule = ngClassify(coffeeScriptClass);
 ```
 
