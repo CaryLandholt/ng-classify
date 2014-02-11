@@ -2,22 +2,62 @@ extend = require 'node.extend'
 
 module.exports = (str, opt) ->
 	options =
+		animation:
+			format: 'spinalCase'
+			prefix: '.'
+			suffix: ''
+		constant:
+			format: 'screamingSnakeCase'
+			prefix: ''
+			suffix: ''
+		controller:
+			format: 'lowerCamelCase'
+			prefix: ''
+			suffix: 'Controller'
+		directive:
+			format: 'lowerCamelCase'
+			prefix: ''
+			suffix: ''
+		factory:
+			format: 'upperCamelCase'
+			prefix: ''
+			suffix: ''
+		filter:
+			format: 'lowerCamelCase'
+			prefix: ''
+			suffix: ''
+		provider:
+			format: 'lowerCamelCase'
+			prefix: ''
+			suffix: 'Provider'
+		service:
+			format: 'lowerCamelCase'
+			prefix: ''
+			suffix: 'Service'
+		value:
+			format: 'lowerCamelCase'
+			prefix: ''
+			suffix: ''
+
+	extend true, options, opt
+
+	options =
 		appName: 'app'
 		extendsPattern: ///
 			(\s+extends\s\w*)
 		///
 		formats:
-			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '.{{className|spinalCase}}', [{{parameters}}]"
+			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.animation.prefix}{{className|#{options.animation.format}}}#{options.animation.suffix}', [{{parameters}}]"
 			config: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
-			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|screamingSnakeCase}}', {{parameters}}.constructor"
-			controller: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}{{moduleType}}', [{{parameters}}]"
-			directive: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}', [{{parameters}}]"
-			factory: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className}}', [{{parameters}}]"
-			filter: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}', [{{parameters}}]"
-			provider: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}{{moduleType}}', [{{parameters}}]"
+			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.constant.prefix}{{className|#{options.constant.format}}}#{options.constant.suffix}', {{parameters}}.constructor"
+			controller: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.controller.prefix}{{className|#{options.controller.format}}}#{options.controller.suffix}', [{{parameters}}]"
+			directive: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.directive.prefix}{{className|#{options.directive.format}}}#{options.directive.suffix}', [{{parameters}}]"
+			factory: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.factory.prefix}{{className|#{options.factory.format}}}#{options.factory.suffix}', [{{parameters}}]"
+			filter: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.filter.prefix}{{className|#{options.filter.format}}}#{options.filter.suffix}', [{{parameters}}]"
+			provider: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.provider.prefix}{{className|#{options.provider.format}}}#{options.provider.suffix}', [{{parameters}}]"
 			run: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
-			service: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}{{moduleType}}', [{{parameters}}]"
-			value: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}', {{parameters}}.constructor"
+			service: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.service.prefix}{{className|#{options.service.format}}}#{options.service.suffix}', [{{parameters}}]"
+			value: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.value.prefix}{{className|#{options.value.format}}}#{options.value.suffix}', {{parameters}}.constructor"
 		pattern: ///
 			(?:\s*)
 			(?:class)
@@ -43,7 +83,7 @@ module.exports = (str, opt) ->
 			)
 		///
 
-	extend options, opt
+	extend true, options, opt
 
 	getModule = (details) ->
 		format = options.formats[details.moduleType.toLowerCase()]
