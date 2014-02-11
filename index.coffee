@@ -64,8 +64,8 @@ module.exports = (str, opt) ->
 				switch filter
 					when 'lowerCamelCase' then detail = detail.charAt(0).toLowerCase() + detail.slice(1)
 					when 'lowerCase' then detail = detail.toLowerCase()					
-					when 'screamingSnakeCase' then detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toUpperCase()
-					when 'snakeCase' then detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toLowerCase()
+					when 'screamingSnakeCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toUpperCase()
+					when 'snakeCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toLowerCase()
 					when 'spinalCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase()
 					when 'trainCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').charAt(0).toUpperCase() + detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').slice(1)
 					when 'upperCamelCase' then detail = detail.charAt(0).toUpperCase() + detail.slice(1)
