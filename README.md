@@ -15,7 +15,6 @@
 	- [Considerations](#considerations)
 	- [Limitations](#limitations)
 	- [Controller As Syntax](#controller-as-syntax)
-* [Naming Conventions](#naming-conventions)
 * [Module Types](#module-types)
 	- [Animation](#animation)
 	- [Config](#config)
@@ -33,6 +32,7 @@
 	- [CoffeeScript](#coffeescript)
 	- [JavaScript](#javascript)
 * [API](#api)
+* [Contributing](#contributing)
 
 ## Overview
 
@@ -73,7 +73,7 @@ So what's wrong with this?
 * Parameter names are duplicated, one for the getters, `'$scope', 'someService'`, and one for the function parameters, `function ($scope, someService)`
 	- this duplication is required to make the module minifiable
 	- some avoid this by the use of [ngmin](https://github.com/btford/ngmin)
-* Depending upon employed naming convention, modyle type, `controller`, and module name, `myController`, have duplication
+* Depending upon the employed naming format, modyle type, `controller`, and module name, `myController`, have duplication
 * The function is anonymous (unnamed), making it more difficult to debug
 * Generally verbose
 
@@ -179,27 +179,6 @@ view for `this` example
 </div>
 ```
 
-**The examples below use the `this` syntax**
-
-## Naming Conventions
-
-The following naming conventions are used.
-NOTE: *ClassName* is used as the example class name
-
-Module Type | Rendered Module Name
---- | ---
-Animation | .class-name
-Config | *n/a*
-Constant | CLASS_NAME
-Controller | classNameController
-Directive | className
-Factory | ClassName
-Filter | className
-Provider | classNameProvider
-Run | *n/a*
-Service | classNameService
-Value | className
-
 ## Module Types
 
 ### Animation
@@ -298,6 +277,9 @@ angular.module('app').constant('HTTP_STATUS_CODES', {
 ```
 
 ### Controller
+
+*The example below uses the [this](#controller-as-syntax) syntax*
+
 ```coffee
 class Home extends Controller
 	constructor: (userService) ->
@@ -671,3 +653,67 @@ Type: `String`
 Default: `'app'`
 
 The name of the AngularJS app
+
+#### options.animation
+
+Type: `Object`
+Default: `{format: 'spinalCase', prefix: '.'}`
+
+#### options.constant
+
+Type: `Object`
+Default: `{format: 'screamingCamelCase'}`
+
+#### options.controller
+
+Type: `Object`
+Default: `{format: 'lowerCamelCase', suffix: 'Controller'}`
+
+#### options.directive
+
+Type: `Object`
+Default: `{format: 'lowerCamelCase'}`
+
+#### options.factory
+
+Type: `Object`
+Default: `{format: 'upperCamelCase'}`
+
+#### options.filter
+
+Type: `Object`
+Default: `{format: 'lowerCamelCase'}`
+
+#### options.provider
+
+Type: `Object`
+Default: `{format: 'lowerCamelCase', suffix: 'Provider'}`
+
+#### options.service
+
+Type: `Object`
+Default: `{format: 'lowerCamelCase', suffix: 'Service'}`
+
+#### options.value
+
+Type: `Object`
+Default: `{format: 'lowerCamelCase'}`
+
+### Supported Formats
+
+Format | Example
+--- | ---
+lowerCamelCase | lowerCamelCase
+lowerCase | lowercase
+screamingSnakeCase | SCREAMING_SNAKE_CASE
+snakeCase | snake_case
+spinalCase | spinal-case
+trainCase | Train-Case
+upperCamelCase | UpperCamelCase
+upperCase | UPPERCASE
+
+## Contributing
+
+In lieu of a formal styleguide, take care to maintain the existing coding style.  Add unit tests for any new or changed functionality. Lint and test your code.
+
+**Pull Requests are welcome!**

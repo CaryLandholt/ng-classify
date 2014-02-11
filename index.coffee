@@ -7,17 +7,17 @@ module.exports = (str, opt) ->
 			(\s+extends\s\w*)
 		///
 		formats:
-			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '.{{className|hyphen|lowerCase}}', [{{parameters}}]"
+			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '.{{className|spinalCase}}', [{{parameters}}]"
 			config: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
-			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|underscore|upperCase}}', {{parameters}}.constructor"
-			controller: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|camelCase}}{{moduleType}}', [{{parameters}}]"
-			directive: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|camelCase}}', [{{parameters}}]"
+			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|screamingSnakeCase}}', {{parameters}}.constructor"
+			controller: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}{{moduleType}}', [{{parameters}}]"
+			directive: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}', [{{parameters}}]"
 			factory: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className}}', [{{parameters}}]"
-			filter: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|camelCase}}', [{{parameters}}]"
-			provider: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|camelCase}}{{moduleType}}', [{{parameters}}]"
+			filter: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}', [{{parameters}}]"
+			provider: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}{{moduleType}}', [{{parameters}}]"
 			run: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
-			service: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|camelCase}}{{moduleType}}', [{{parameters}}]"
-			value: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|camelCase}}', {{parameters}}.constructor"
+			service: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}{{moduleType}}', [{{parameters}}]"
+			value: "angular.module('{{appName}}').{{moduleType|lowerCase}} '{{className|lowerCamelCase}}', {{parameters}}.constructor"
 		pattern: ///
 			(?:\s*)
 			(?:class)
@@ -62,15 +62,15 @@ module.exports = (str, opt) ->
 
 			for filter in filters when filters.length isnt 1
 				switch filter
-					when 'camelCase' then detail = detail.charAt(0).toLowerCase() + detail.slice(1)
-					when 'hyphen' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1-$2')
 					when 'lowerCamelCase' then detail = detail.charAt(0).toLowerCase() + detail.slice(1)
-					when 'lowerCase' then detail = detail.toLowerCase()
-					when 'underscore' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1_$2')
+					when 'lowerCase' then detail = detail.toLowerCase()					
+					when 'screamingSnakeCase' then detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toUpperCase()
+					when 'snakeCase' then detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toLowerCase()
+					when 'spinalCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase()
+					when 'trainCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').charAt(0).toUpperCase() + detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').slice(1)
 					when 'upperCamelCase' then detail = detail.charAt(0).toUpperCase() + detail.slice(1)
 					when 'upperCase' then detail = detail.toUpperCase()
 					
-
 			compiled.push if detail then detail else component
 
 		module = compiled.join ''
