@@ -139,6 +139,7 @@ class My extends Controller
 ### Limitations
 
 * One class per file
+* The first line in the class must be the constructor
 
 ### Controller As Syntax
 
