@@ -14,6 +14,7 @@
 	- [Controller As Syntax](#controller-as-syntax)
 * [Module Types](#module-types)
 	- [Animation](#animation)
+	- [App](#app)
 	- [Config](#config)
 	- [Constant](#constant)
 	- [Controller](#controller)
@@ -213,6 +214,28 @@ angular.module('app').animation('.my-crazy-animation', [
 			}
 		};
 	}
+]);
+```
+
+### App
+
+*Although there is no AngularJS App module type, it is included for consistency.*
+*The class name serves no significance outside of [debugging](#benefits).*
+
+```coffee
+class App extends App
+	@constructor = [
+		'ngAnimate'
+		'ngRoute'
+	]
+```
+
+equivalent to
+
+```javascript
+angular.module('app', [
+	'ngAnimate',
+	'ngRoute'
 ]);
 ```
 

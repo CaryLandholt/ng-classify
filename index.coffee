@@ -7,10 +7,6 @@ module.exports = (str, opt) ->
 			format: 'spinalCase'
 			prefix: '.'
 			suffix: ''
-		app:
-			format: ''
-			prefix: ''
-			suffix: ''
 		constant:
 			format: 'screamingSnakeCase'
 			prefix: ''
