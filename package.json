@@ -25,6 +25,7 @@
 		"url": "https://github.com/CaryLandholt/ng-classify"
 	},
 	"dependencies": {
+		"lodash": "~2.4.1",
 		"node.extend": "~1.0.9"
 	},
 	"engines": {

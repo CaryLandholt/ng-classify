@@ -1,3 +1,4 @@
+_ = require 'lodash'
 extend = require 'node.extend'
 
 module.exports = (str, opt) ->
@@ -5,6 +6,10 @@ module.exports = (str, opt) ->
 		animation:
 			format: 'spinalCase'
 			prefix: '.'
+			suffix: ''
+		app:
+			format: ''
+			prefix: ''
 			suffix: ''
 		constant:
 			format: 'screamingSnakeCase'
@@ -48,6 +53,7 @@ module.exports = (str, opt) ->
 		///
 		formats:
 			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.animation.prefix}{{className|#{options.animation.format}}}#{options.animation.suffix}', [{{parameters}}]"
+			app: "angular.module '{{appName}}', {{parameters}}.constructor"
 			config: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
 			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.constant.prefix}{{className|#{options.constant.format}}}#{options.constant.suffix}', {{parameters}}.constructor"
 			controller: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{options.controller.prefix}{{className|#{options.controller.format}}}#{options.controller.suffix}', [{{parameters}}]"
@@ -66,7 +72,7 @@ module.exports = (str, opt) ->
 			(?:\s+)
 			(?:extends)
 			(?:\s+)
-			(?=Animation|Config|Constant|Controller|Directive|Factory|Filter|Provider|Run|Service|Value)
+			(?=Animation|App|Config|Constant|Controller|Directive|Factory|Filter|Provider|Run|Service|Value)
 			(\w*)
 			(?:\s+)
 			(
@@ -84,6 +90,9 @@ module.exports = (str, opt) ->
 		///
 
 	extend true, options, opt
+
+	if options.data
+		str = _.template str, options.data
 
 	getModule = (details) ->
 		format = options.formats[details.moduleType.toLowerCase()]
