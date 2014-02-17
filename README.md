@@ -13,8 +13,8 @@
 	- [Limitations](#limitations)
 	- [Controller As Syntax](#controller-as-syntax)
 * [Module Types](#module-types)
-	- [Animation](#animation)
 	- [App](#app)
+	- [Animation](#animation)
 	- [Config](#config)
 	- [Constant](#constant)
 	- [Controller](#controller)
@@ -179,6 +179,28 @@ view for `this` example
 
 ## Module Types
 
+### App
+
+*Although there is no AngularJS App module type, it is included for consistency.*
+*The class name serves no significance outside of [debugging](#benefits).*
+
+```coffee
+class App extends App
+	@constructor = [
+		'ngAnimate'
+		'ngRoute'
+	]
+```
+
+equivalent to
+
+```javascript
+angular.module('app', [
+	'ngAnimate',
+	'ngRoute'
+]);
+```
+
 ### Animation
 
 ```coffee
@@ -214,28 +236,6 @@ angular.module('app').animation('.my-crazy-animation', [
 			}
 		};
 	}
-]);
-```
-
-### App
-
-*Although there is no AngularJS App module type, it is included for consistency.*
-*The class name serves no significance outside of [debugging](#benefits).*
-
-```coffee
-class App extends App
-	@constructor = [
-		'ngAnimate'
-		'ngRoute'
-	]
-```
-
-equivalent to
-
-```javascript
-angular.module('app', [
-	'ngAnimate',
-	'ngRoute'
 ]);
 ```
 
@@ -674,47 +674,55 @@ Default: `'app'`
 
 The name of the AngularJS app
 
-#### options.animation
+##### options.data
+
+Type: `Object`
+Default `undefined`
+
+An object used for compiling [Lo-Dash templates](http://lodash.com/docs#template).
+If the CoffeeScript file contains Lo-Dash methods, they will be compiled prior to ng-classify with this object.
+
+##### options.animation
 
 Type: `Object`
 Default: `{format: 'spinalCase', prefix: '.'}`
 
-#### options.constant
+##### options.constant
 
 Type: `Object`
 Default: `{format: 'screamingCamelCase'}`
 
-#### options.controller
+##### options.controller
 
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Controller'}`
 
-#### options.directive
+##### options.directive
 
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
-#### options.factory
+##### options.factory
 
 Type: `Object`
 Default: `{format: 'upperCamelCase'}`
 
-#### options.filter
+##### options.filter
 
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
-#### options.provider
+##### options.provider
 
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Provider'}`
 
-#### options.service
+##### options.service
 
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Service'}`
 
-#### options.value
+##### options.value
 
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
