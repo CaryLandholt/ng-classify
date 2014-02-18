@@ -41,7 +41,7 @@ ng-classify makes it easy.
 Here's how you write a controller using ng-classify
 
 ```coffee
-class My extends Controller
+class Admin extends Controller
 	constructor: ($scope, someService) ->
 		$scope.coolMethod = someService.coolMethod()
 ```
@@ -49,17 +49,17 @@ class My extends Controller
 which is equivalent to
 
 ```javascript
-angular.module('app').controller('myController', ['$scope', 'someService', function ($scope, someService) {
+angular.module('app').controller('adminController', ['$scope', 'someService', function ($scope, someService) {
 	$scope.coolMethod = someService.coolMethod();
 }]);
 ```
 
 ### Why?
 
-Take the following typical AngularJS controller declaration
+Take the following typical AngularJS controller declaration *(same as above)*
 
 ```javascript
-angular.module('app').controller('myController', ['$scope', 'someService', function ($scope, someService) {
+angular.module('app').controller('adminController', ['$scope', 'someService', function ($scope, someService) {
 	$scope.coolMethod = someService.coolMethod();
 }]);
 ```
@@ -71,17 +71,17 @@ So what's wrong with this?
 * Parameter names are duplicated, one for the getters, `'$scope', 'someService'`, and one for the function parameters, `function ($scope, someService)`
 	- this duplication is required to make the module minifiable
 	- some avoid this by the use of [ngmin](https://github.com/btford/ngmin)
-* Depending upon the employed naming format, modyle type, `controller`, and module name, `myController`, have duplication
+* Depending upon the employed naming format, module type, `controller`, and module name, `adminController`, have duplication, due to the suffixed `controller` in this example
 * The function is anonymous (unnamed), making it more difficult to debug
 * Generally verbose
 
 ### How?
 
-Write AngularJS modules using the following syntax.
+Write AngularJS modules using the following syntaxes.
 NOTE: `{{placeholder}}` denotes placeholders
 
 ```coffee
-class {{appName}} extends {{Animation|Config|Controller|Directive|Factory|Filter|Provider|Run|Service}}
+class {{appName}} extends {{App|Animation|Config|Controller|Directive|Factory|Filter|Provider|Run|Service}}
 	constructor: ({{params}}) ->
 		# module body here
 ```
@@ -89,7 +89,7 @@ class {{appName}} extends {{Animation|Config|Controller|Directive|Factory|Filter
 or
 
 ```coffee
-class {{name}} extends {{Constant|Value}}
+class {{name}} extends {{App|Constant|Value}}
 	@constructor = {{value}}
 ```
 
@@ -98,17 +98,17 @@ class {{name}} extends {{Constant|Value}}
 The typical way to use CoffeeScript classes with AngularJS is as follows.
 
 ```coffee
-class MyController
+class AdminController
 	constructor: ($scope, someService) ->
 		$scope.coolMethod = someService.coolMethod()
 
-angular.module('app').controller 'myController', ['$scope', 'someService', MyController]
+angular.module('app').controller 'adminController', ['$scope', 'someService', AdminController]
 ```
 
 which is equivalent to
 
 ```javascript
-angular.module('app').controller('myController', ['$scope', 'someService', function MyController($scope, someService) {
+angular.module('app').controller('adminController', ['$scope', 'someService', function AdminController($scope, someService) {
 	$scope.coolMethod = someService.coolMethod();
 }]);
 ```
@@ -116,7 +116,7 @@ angular.module('app').controller('myController', ['$scope', 'someService', funct
 with ng-classify, this is all you need
 
 ```coffee
-class My extends Controller
+class Admin extends Controller
 	constructor: ($scope, someService) ->
 		$scope.coolMethod = someService.coolMethod()
 ```
@@ -141,14 +141,14 @@ class My extends Controller
 
 ### Controller As Syntax
 
-AngularJS provides two styles for writing and consuming controller
+AngularJS provides two styles for writing and consuming controllers
 1. `$scope`
 2. `this` with `Controller as`
 
 `$scope` example
 
 ```coffee
-class My extends Controller
+class Admin extends Controller
 	constructor: ($scope, someService) ->
 		$scope.coolMethod = someService.coolMethod()
 ```
@@ -156,7 +156,7 @@ class My extends Controller
 view for `$scope` example
 
 ```html
-<div ng-controller="myController">
+<div ng-controller="adminController">
 	<button ng-click="coolMethod()">Cool It Down!</button>
 </div>
 ```
@@ -164,7 +164,7 @@ view for `$scope` example
 `this` example
 
 ```coffee
-class My extends Controller
+class Admin extends Controller
 	constructor: (someService) ->
 		@coolMethod = someService.coolMethod()
 ```
@@ -172,7 +172,7 @@ class My extends Controller
 view for `this` example
 
 ```html
-<div ng-controller="myController as controller">
+<div ng-controller="adminController as controller">
 	<button ng-click="controller.coolMethod()">Cool It Down!</button>
 </div>
 ```
@@ -182,7 +182,6 @@ view for `this` example
 ### App
 
 *Although there is no AngularJS App module type, it is included for consistency.*
-*The class name serves no significance outside of [debugging](#benefits).*
 
 ```coffee
 class App extends App
@@ -204,7 +203,7 @@ angular.module('app', [
 ### Animation
 
 ```coffee
-class MyCrazyAnimation extends Animation
+class MyCrazyFader extends Animation
 	constructor: ->
 		return {
 			enter: (element, done) ->
@@ -220,8 +219,8 @@ class MyCrazyAnimation extends Animation
 equivalent to
 
 ```javascript
-angular.module('app').animation('.my-crazy-animation', [
-	function MyCrazyAnimation() {
+angular.module('app').animation('.my-crazy-fader', [
+	function MyCrazyFader() {
 		return {
 			enter: function (element, done) {
 				// run the animation here and call done when the animation is complete
@@ -347,12 +346,12 @@ angular.module('app').directive('dialog', [
 ### Factory
 
 Although the following is a large example, it illustrates the use of the `new` keyword with Factories.
-Notice the `return class` statement inside the first constructor function.  This provides the ability to create a new instance of the class.
+Notice the `return class` statement inside the first constructor function.  This provides the ability to create a new instance of the class.  *Note: this is not required*
 
 ```coffee
 class Collection extends Factory
 	constructor: ($log) ->
-		return class CollectionInstance
+		return class
 			constructor: (collection) ->
 				isUndefined = angular.isUndefined collection
 
@@ -409,7 +408,7 @@ equivalent to
 angular.module('app').factory('Collection', ['$log',
 	function Collection($log) {
 		return (function () {
-			function CollectionInstance(collection) {
+			function _Class(collection) {
 				var isUndefined = angular.isUndefined(collection);
 
 				if (isUndefined) {
@@ -510,7 +509,7 @@ equivalent to
 angular.module('app').filter('twitterfy', [
 	function Twitterfy() {
 		return function (username) {
-			return "@" + username;
+			return '@' + username;
 		};
 	}
 ]);
@@ -576,7 +575,7 @@ angular.module('app').run(['$httpBackend',
 
 ### Service
 ```coffee
-class Greetings extends Service
+class Greeting extends Service
 	constructor: ($log) ->
 		@sayHello = (name) ->
 			$log.info name
@@ -585,8 +584,8 @@ class Greetings extends Service
 equivalent to
 
 ```javascript
-angular.module('app').service('greetingsService', ['$log',
-	function Greetings($log) {
+angular.module('app').service('greetingService', ['$log',
+	function Greeting($log) {
 		this.sayHello = function (name) {
 			return $log.info(name);
 		};
@@ -680,7 +679,32 @@ Type: `Object`
 Default `undefined`
 
 An object used for compiling [Lo-Dash templates](http://lodash.com/docs#template).
-If the CoffeeScript file contains Lo-Dash methods, they will be compiled prior to ng-classify with this object.
+If the CoffeeScript file contains Lo-Dash template methods, they will be compiled prior to ng-classify with this object.
+
+The following shows an example of conditionally including the AngularJS module, ngMockE2E, if the environment is `'dev'`.
+It will not be included if environment is anything other than `'dev'`.
+
+```coffee
+class App extends App
+	@constructor = [
+		'ngAnimate'
+		<% if (environment === 'dev') { %>'ngMockE2E'<% } %>
+		'ngRoute'
+	]
+```
+
+The above class would be compiled using the command below.
+
+```coffee
+ngClassify = require 'ng-classify'
+coffeeScriptClass = '{{CoffeeScript Class as a String}}'
+
+options =
+	data:
+		environment: 'dev'
+
+angularModule = ngClassify coffeeScriptClass, options
+```
 
 ##### options.animation
 
@@ -690,7 +714,7 @@ Default: `{format: 'spinalCase', prefix: '.'}`
 ##### options.constant
 
 Type: `Object`
-Default: `{format: 'screamingCamelCase'}`
+Default: `{format: 'screamingSnakeCase'}`
 
 ##### options.controller
 
