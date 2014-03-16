@@ -24,7 +24,7 @@
 	- [Provider](#provider)
 	- [Run](#run)
 	- [Service](#service)
-	- [Value](#Value)
+	- [Value](#value)
 * [Install](#install)
 * [Examples](#examples)
 	- [CoffeeScript](#coffeescript)
@@ -359,38 +359,38 @@ class Collection extends Factory
 					collection = []
 
 				isArray = angular.isArray collection
-				
+
 				if not isArray
 					throw new Error 'Collection must be an array'
-					
+
 				$log.debug 'creating collection', collection
-					
+
 				originalCollection = angular.copy collection
-		
+
 				@append = (item) ->
 					$log.debug "appending \"#{item}\" to", collection
 					collection.push item
 					@
-					
+
 				@get = ->
 					$log.debug 'getting collection', collection
 					collection
-					
+
 				@getOriginal = ->
 					$log.debug 'getting original collection', originalCollection
 					originalCollection
-					
+
 				@prepend = (item) ->
 					$log.debug "prepending \"#{item}\" to", collection
 					collection.unshift item
 					@
-					
+
 				@sort = (direction = 'asc') ->
 					$log.debug "sorting by \"#{direction}\"", collection
-					
+
 					directions = ['asc', 'desc']
 					isValidDirection = directions.indexOf(direction) isnt -1
-					
+
 					if not isValidDirection
 						throw new Error "Direction must be either asc or desc.  \"#{direction}\" passed"
 
@@ -398,7 +398,7 @@ class Collection extends Factory
 						collection.sort()
 					else
 						collection.reverse()
-						
+
 					@
 ```
 
