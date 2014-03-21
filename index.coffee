@@ -108,24 +108,27 @@ module.exports = (str, opt) ->
 			for filter in filters when filters.length isnt 1
 				switch filter
 					when 'lowerCamelCase' then detail = detail.charAt(0).toLowerCase() + detail.slice(1)
-					when 'lowerCase' then detail = detail.toLowerCase()					
+					when 'lowerCase' then detail = detail.toLowerCase()
 					when 'screamingSnakeCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toUpperCase()
 					when 'snakeCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1_$2').toLowerCase()
 					when 'spinalCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase()
 					when 'trainCase' then detail = detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').charAt(0).toUpperCase() + detail.replace(/([a-z\d])([A-Z])/g, '$1-$2').slice(1)
 					when 'upperCamelCase' then detail = detail.charAt(0).toUpperCase() + detail.slice(1)
 					when 'upperCase' then detail = detail.toUpperCase()
-					
+
 			compiled.push if detail then detail else component
 
 		module = compiled.join ''
 
-	matches = str.split options.pattern
-	appName = options.appName
-	className = matches[1]
-	moduleType = matches[2]
-	parameters = if matches[4] then matches[4].replace('(', '').replace(')', '').replace(/\s*/g, '').replace(/@/g, '').split(',') else []
-	details = {appName, moduleType, className, parameters}
-	module = getModule details
-	trimmedContents = str.replace options.extendsPattern, ''
-	output = "#{trimmedContents}\n\n#{module}"
+	try
+		matches = str.split options.pattern
+		appName = options.appName
+		className = matches[1]
+		moduleType = matches[2]
+		parameters = if matches[4] then matches[4].replace('(', '').replace(')', '').replace(/\s*/g, '').replace(/@/g, '').split(',') else []
+		details = {appName, moduleType, className, parameters}
+		module = getModule details
+		trimmedContents = str.replace options.extendsPattern, ''
+		output = "#{trimmedContents}\n\n#{module}"
+	catch error
+		str
