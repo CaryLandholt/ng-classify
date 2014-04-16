@@ -2,33 +2,33 @@
 	"name": "ng-classify",
 	"version": "0.4.2",
 	"description": "Compile CoffeeScript classes to AngularJS modules",
+	"author": {
+		"name": "Cary Landholt",
+		"email": "cary@landholt.com",
+		"url": "https://github.com/CaryLandholt"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/CaryLandholt/ng-classify"
+	},
+	"main": "index",
 	"keywords": [
 		"angularjs",
 		"class",
 		"coffeescript",
 		"module"
 	],
-	"homepage": "https://github.com/CaryLandholt/ng-classify",
-	"bugs": {
-		"url": "https://github.com/CaryLandholt/ng-classify/issues",
-		"email": "cary@landholt.com"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Cary Landholt",
-		"email": "cary@landholt.com",
-		"url": "https://github.com/CaryLandholt"
-	},
-	"main": "index",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/CaryLandholt/ng-classify"
+	"engines": {
+		"node": ">=0.10.0"
 	},
 	"dependencies": {
 		"lodash": "~2.4.1",
-		"node.extend": "~1.0.9"
+		"node.extend": "~1.0.10"
 	},
-	"engines": {
-		"node": ">=0.10.0"
+	"devDependencies": {
+		"coffee-script": "~1.7.1",
+		"conventional-changelog": "~0.0.8",
+		"gulp": "~3.6.0",
+		"gulp-util": "~2.2.14"
 	}
 }
