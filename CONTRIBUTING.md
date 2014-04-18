@@ -8,7 +8,7 @@
 
 
 ## Issues
-If you find a bug in the source code or a mistake in the documentation, you can help by submitting an [issue](https://github.com/CaryLandholt/ng-classify/issues) to the repository.  Even better, you can submit a [Pull Request](#pull-request) with a fix.
+If you find a bug in the source code or a mistake in the documentation, you can help by submitting an [issue](https://github.com/CaryLandholt/ng-classify/issues) to the repository.  Even better, you can submit a [Pull Request](#pull-requests) with a fix.
 
 Before you submit your issue, search the [archive](https://github.com/CaryLandholt/ng-classify/issues).  Maybe your question was already answered.
 
