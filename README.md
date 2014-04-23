@@ -1,4 +1,4 @@
-# ng-classify [![Version][version-image]][version-url] [![Build Status][build-image]][build-url] [![Dependency Status][dependencies-image]][dependencies-url] [![devDependency Status][dev-dependencies-image]][dev-dependencies-url]
+# ng-classify [![Version][version-image]][version-url] [![Build Status][build-image]][build-url] [![Dependency Status][dependencies-image]][dependencies-url] [![License][license-image]][license-url]
 > Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules
 
 
@@ -756,14 +756,14 @@ See [CHANGELOG.md](CHANGELOG.md)
 See [LICENSE](LICENSE)
 
 
-[build-image]:            https://secure.travis-ci.org/CaryLandholt/ng-classify.svg
+[build-image]:            http://img.shields.io/travis/CaryLandholt/ng-classify.svg?style=flat
 [build-url]:              http://travis-ci.org/CaryLandholt/ng-classify
 
-[dependencies-image]:     https://david-dm.org/CaryLandholt/ng-classify.svg
-[dependencies-url]:       https://david-dm.org/CaryLandholt/ng-classify
+[dependencies-image]:     http://img.shields.io/gemnasium/CaryLandholt/ng-classify.svg?style=flat
+[dependencies-url]:       https://gemnasium.com/CaryLandholt/ng-classify
 
-[dev-dependencies-image]: https://david-dm.org/CaryLandholt/ng-classify/dev-status.svg
-[dev-dependencies-url]:   https://david-dm.org/CaryLandholt/ng-classify#info=devDependencies
+[license-image]:          http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]:            LICENSE
 
-[version-image]:          https://badge.fury.io/js/ng-classify.svg
+[version-image]:          http://img.shields.io/npm/v/ng-classify.svg?style=flat
 [version-url]:            https://npmjs.org/package/ng-classify
