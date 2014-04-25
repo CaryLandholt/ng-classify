@@ -41,7 +41,7 @@ $ git commit -a
   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files
 * Build your changes locally to ensure all the tests pass
 ```bash
-$ grunt test
+$ gulp test
 ```
 * Push your branch
 ```bash
