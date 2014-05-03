@@ -17,6 +17,8 @@ gulp.task 'changelog', ->
 	conventionalChangelog options, (err, log) ->
 		fs.writeFile CHANGELOG_FILE, log
 
+gulp.task 'default', ['test']
+
 gulp.task 'test', ->
 	options =
 		verbose: true
