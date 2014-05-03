@@ -632,7 +632,6 @@ var angularModule = ngClassify(coffeeScriptClass);
 
 
 #### coffeeScriptClass
-
 Type: `String`
 Default: `undefined`
 
@@ -640,12 +639,10 @@ The contents of a CoffeeScript class to be converted into an AngularJS module
 
 
 #### options
-
 Type: `Object`
 
 
 ##### options.appName
-
 Type: `String`
 Default: `'app'`
 
@@ -653,7 +650,6 @@ The name of the AngularJS app
 
 
 ##### options.data
-
 Type: `Object`
 Default `undefined`
 
@@ -686,55 +682,46 @@ angularModule = ngClassify coffeeScriptClass, options
 
 
 ##### options.animation
-
 Type: `Object`
 Default: `{format: 'spinalCase', prefix: '.'}`
 
 
 ##### options.constant
-
 Type: `Object`
 Default: `{format: 'screamingSnakeCase'}`
 
 
 ##### options.controller
-
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Controller'}`
 
 
 ##### options.directive
-
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
 
 ##### options.factory
-
 Type: `Object`
 Default: `{format: 'upperCamelCase'}`
 
 
 ##### options.filter
-
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
 
 ##### options.provider
-
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Provider'}`
 
 
 ##### options.service
-
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Service'}`
 
 
 ##### options.value
-
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
