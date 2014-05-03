@@ -29,6 +29,7 @@
 		"coffee-script": "~1.7.1",
 		"conventional-changelog": "~0.0.8",
 		"gulp": "~3.6.2",
+		"gulp-jasmine": "~0.2.0",
 		"gulp-util": "~2.2.14"
 	}
 }

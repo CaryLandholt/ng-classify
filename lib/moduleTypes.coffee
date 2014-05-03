@@ -1,0 +1,1 @@
+module.exports = ['Animation', 'App', 'Config', 'Constant', 'Controller', 'Directive', 'Factory', 'Filter', 'Provider', 'Run', 'Service', 'Value']

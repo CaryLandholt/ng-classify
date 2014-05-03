@@ -9,7 +9,6 @@
 	- [CoffeeScript classes](#coffeescript-classes)
 	- [Benefits](#benefits)
 	- [Considerations](#considerations)
-	- [Limitations](#limitations)
 	- [Controller As Syntax](#controller-as-syntax)
 * [Module Types](#module-types)
 	- [App](#app)
@@ -127,13 +126,9 @@ class Admin extends Controller
 * To avoid the use of global variables, it is advised to use the `bare: false` CoffeeScript compilation option.  see [CoffeeScript Usage](http://coffeescript.org/#usage)
 
 
-### Limitations
-* One class per file
-* The first line in the class must be the constructor
-
-
 ### Controller As Syntax
 AngularJS provides two styles for writing and consuming controllers
+
 1. `$scope`
 2. `this` with `Controller as`
 
@@ -637,6 +632,7 @@ var angularModule = ngClassify(coffeeScriptClass);
 
 
 #### coffeeScriptClass
+
 Type: `String`
 Default: `undefined`
 
@@ -644,10 +640,12 @@ The contents of a CoffeeScript class to be converted into an AngularJS module
 
 
 #### options
+
 Type: `Object`
 
 
 ##### options.appName
+
 Type: `String`
 Default: `'app'`
 
@@ -655,6 +653,7 @@ The name of the AngularJS app
 
 
 ##### options.data
+
 Type: `Object`
 Default `undefined`
 
@@ -687,46 +686,55 @@ angularModule = ngClassify coffeeScriptClass, options
 
 
 ##### options.animation
+
 Type: `Object`
 Default: `{format: 'spinalCase', prefix: '.'}`
 
 
 ##### options.constant
+
 Type: `Object`
 Default: `{format: 'screamingSnakeCase'}`
 
 
 ##### options.controller
+
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Controller'}`
 
 
 ##### options.directive
+
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
 
 ##### options.factory
+
 Type: `Object`
 Default: `{format: 'upperCamelCase'}`
 
 
 ##### options.filter
+
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
 
 ##### options.provider
+
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Provider'}`
 
 
 ##### options.service
+
 Type: `Object`
 Default: `{format: 'lowerCamelCase', suffix: 'Service'}`
 
 
 ##### options.value
+
 Type: `Object`
 Default: `{format: 'lowerCamelCase'}`
 
@@ -734,6 +742,7 @@ Default: `{format: 'lowerCamelCase'}`
 ### Supported Formats
 Format | Example
 --- | ---
+camelCase | camelCase
 lowerCamelCase | lowerCamelCase
 lowerCase | lowercase
 screamingSnakeCase | SCREAMING_SNAKE_CASE
