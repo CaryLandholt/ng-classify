@@ -470,27 +470,15 @@ describe 'ng-classify', ->
 
 		expect(result).toEqual(expectation)
 
-	it 'should compile multiple Controllers with comments and functions', ->
+	it 'should compile with block comments before the class', ->
 		input = '''
 		###
 		My Home Controller
 		###
-		cube = (x) ->
-			x * x * x
-
 		class Home extends Controller
 			constructor: (@userService) ->
 				@save = (username) ->
-					userService.addUser username + cube(3)
-
-		###
-		My AnotherHome Controller
-		###
-		class AnotherHome extends Controller
-			# the constructor
-			constructor: (anotherService) ->
-				@save = (username) ->
-					userService.addUser username + square(2)
+					userService.addUser username
 		'''
 
 		result = ngClassify input
@@ -499,28 +487,123 @@ describe 'ng-classify', ->
 		###
 		My Home Controller
 		###
-		cube = (x) ->
-			x * x * x
-
 		class Home
 			constructor: (@userService) ->
 				@save = (username) ->
-					userService.addUser username + cube(3)
-
-		###
-		My AnotherHome Controller
-		###
-		class AnotherHome
-			# the constructor
-			constructor: (anotherService) ->
-				@save = (username) ->
-					userService.addUser username + square(2)
+					userService.addUser username
 
 		angular.module('app').controller 'homeController', ['userService', Home]
-		angular.module('app').controller 'anotherHomeController', ['anotherService', AnotherHome]
 		'''
 
 		expect(result).toEqual(expectation)
+
+	it 'should compile with block comments before the constructor', ->
+		input = '''
+		class Home extends Controller
+			###
+			The Constructor
+			###
+			constructor: (@userService) ->
+				@save = (username) ->
+					userService.addUser username
+		'''
+
+		result = ngClassify input
+
+		expectation = '''
+		class Home
+			###
+			The Constructor
+			###
+			constructor: (@userService) ->
+				@save = (username) ->
+					userService.addUser username
+
+		angular.module('app').controller 'homeController', ['userService', Home]
+		'''
+
+		expect(result).toEqual(expectation)
+
+	it 'should compile with inline comments before the constructor', ->
+		input = '''
+		class Home extends Controller
+			# The Constructor
+			constructor: (@userService) ->
+				@save = (username) ->
+					userService.addUser username
+		'''
+
+		result = ngClassify input
+
+		expectation = '''
+		class Home
+			# The Constructor
+			constructor: (@userService) ->
+				@save = (username) ->
+					userService.addUser username
+
+		angular.module('app').controller 'homeController', ['userService', Home]
+		'''
+
+		expect(result).toEqual(expectation)
+
+	# it 'should compile multiple Controllers with comments and functions', ->
+	# 	input = '''
+	# 	###
+	# 	My Home Controller
+	# 	###
+	# 	cube = (x) ->
+	# 		x * x * x
+	#
+	# 	class Home extends Controller
+	# 		constructor: (@userService) ->
+	# 			@save = (username) ->
+	# 				userService.addUser username + cube(3)
+	#
+	# 	###
+	# 	My AnotherHome Controller
+	# 	###
+	# 	class AnotherHome extends Controller
+	# 		square = (x) ->
+	# 			x * x
+	#
+	# 		# the constructor
+	# 		constructor: (anotherService) ->
+	# 			@save = (username) ->
+	# 				userService.addUser username + square(2)
+	# 	'''
+	#
+	# 	result = ngClassify input
+	#
+	# 	expectation = '''
+	# 	###
+	# 	My Home Controller
+	# 	###
+	# 	cube = (x) ->
+	# 		x * x * x
+	#
+	# 	class Home
+	# 		constructor: (@userService) ->
+	# 			@save = (username) ->
+	# 				userService.addUser username + cube(3)
+	#
+	# 	###
+	# 	My AnotherHome Controller
+	# 	###
+	# 	class AnotherHome
+	# 		square = (x) ->
+	# 			x * x
+	#
+	# 		# the constructor
+	# 		constructor: (anotherService) ->
+	# 			@save = (username) ->
+	# 				userService.addUser username + square(2)
+	#
+	# 	angular.module('app').controller 'homeController', ['userService', Home]
+	# 	angular.module('app').controller 'anotherHomeController', ['anotherService', AnotherHome]
+	# 	'''
+	#
+	# 	expect(result).toEqual(expectation)
 
 	it 'should leave standard classes as-is', ->
 		input = '''

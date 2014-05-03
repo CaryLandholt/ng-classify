@@ -22,7 +22,11 @@ module.exports = (contents) ->
 		constructorParameters = []
 
 		if hasConstructorParams
-			constructorParams = expression.base.properties[0].value.params
+			constructorParams = {}
+
+			expression.base.properties.forEach (prop, i) ->
+				if prop.value
+					constructorParams = prop.value.params
 
 			constructorParams.forEach (constructorParam) ->
 				name                 = constructorParam.name
