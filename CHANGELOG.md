@@ -1,3 +1,12 @@
+<a name="0.5.2"></a>
+### 0.5.2  (2014-05-03)
+
+
+#### Bug Fixes
+
+* **comments:** iterate properties properly ([05138b88](https://github.com/CaryLandholt/ng-classify/commit/05138b88432b0266dcd40a07bece8e5426475953), closes [#3](https://github.com/CaryLandholt/ng-classify/issues/3))
+
+
 <a name="0.5.1"></a>
 ### 0.5.1  (2014-05-02)
 
