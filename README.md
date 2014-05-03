@@ -693,12 +693,12 @@ Default: `{format: 'screamingSnakeCase'}`
 
 ##### options.controller
 Type: `Object`
-Default: `{format: 'lowerCamelCase', suffix: 'Controller'}`
+Default: `{format: 'camelCase', suffix: 'Controller'}`
 
 
 ##### options.directive
 Type: `Object`
-Default: `{format: 'lowerCamelCase'}`
+Default: `{format: 'camelCase'}`
 
 
 ##### options.factory
@@ -708,22 +708,22 @@ Default: `{format: 'upperCamelCase'}`
 
 ##### options.filter
 Type: `Object`
-Default: `{format: 'lowerCamelCase'}`
+Default: `{format: 'camelCase'}`
 
 
 ##### options.provider
 Type: `Object`
-Default: `{format: 'lowerCamelCase', suffix: 'Provider'}`
+Default: `{format: 'camelCase', suffix: 'Provider'}`
 
 
 ##### options.service
 Type: `Object`
-Default: `{format: 'lowerCamelCase', suffix: 'Service'}`
+Default: `{format: 'camelCase', suffix: 'Service'}`
 
 
 ##### options.value
 Type: `Object`
-Default: `{format: 'lowerCamelCase'}`
+Default: `{format: 'camelCase'}`
 
 
 ### Supported Formats
