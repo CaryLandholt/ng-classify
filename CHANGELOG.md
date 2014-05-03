@@ -1,5 +1,14 @@
-<a name="v0.4.2"></a>
-## v0.4.2  (2014-03-20)
+<a name="0.5.0"></a>
+## 0.5.0  (2014-05-02)
+
+
+#### Bug Fixes
+
+* **parsing:** remove regex parsing, use coffee-script nodes ([194c5917](https://github.com/CaryLandholt/ng-classify/commit/194c5917b83b3f485d22ef6292797f58d9624fbd))
+
+
+<a name="0.4.2"></a>
+## 0.4.2  (2014-03-20)
 
 
 #### Bug Fixes
