@@ -1,3 +1,12 @@
+<a name="0.5.1"></a>
+### 0.5.1  (2014-05-02)
+
+
+#### Bug Fixes
+
+* **coffee-script:** move coffee-script to dependencies ([a92f54b3](https://github.com/CaryLandholt/ng-classify/commit/a92f54b3fe696250f5807d2b8165a41241418f4a))
+
+
 <a name="0.5.0"></a>
 ## 0.5.0  (2014-05-02)
 
