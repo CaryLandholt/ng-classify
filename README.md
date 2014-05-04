@@ -628,14 +628,14 @@ var angularModule = ngClassify(coffeeScriptClass);
 ## API
 
 
-### ngClassify(coffeeScriptClass, options)
+### ngClassify(content, options)
 
 
-#### coffeeScriptClass
+#### content
 Type: `String`
 Default: `undefined`
 
-The contents of a CoffeeScript class to be converted into an AngularJS module
+The content that may contain CoffeeScript classes to convert to AngularJS modules
 
 
 #### options
