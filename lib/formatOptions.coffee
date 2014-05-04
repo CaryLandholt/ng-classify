@@ -1,7 +1,7 @@
 extend = require 'node.extend'
 
-module.exports = (opt) ->
-	options =
+module.exports = (options) ->
+	formatOptions =
 		animation:
 			format: 'spinalCase'
 			prefix: '.'
@@ -26,10 +26,10 @@ module.exports = (opt) ->
 			format: 'camelCase'
 
 	# add empty prefix and suffix if not supplied
-	for k, v of options
-		prefix = options[k].prefix
-		suffix = options[k].suffix
-		options[k].prefix = '' if !prefix
-		options[k].suffix = '' if !suffix
+	for k, v of formatOptions
+		prefix                  = formatOptions[k].prefix
+		suffix                  = formatOptions[k].suffix
+		formatOptions[k].prefix = '' if !prefix
+		formatOptions[k].suffix = '' if !suffix
 
-	merged = extend true, options, opt
+	merged = extend true, formatOptions, options

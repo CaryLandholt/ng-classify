@@ -2,41 +2,78 @@ coffeeScript = require 'coffee-script'
 moduleTypes  = require './moduleTypes'
 nodes        = coffeeScript.nodes
 
-module.exports = (contents) ->
-	expressions  = nodes(contents).expressions
+module.exports = (content) ->
 	classDetails = []
 
-	for key, node of expressions
-		hasExtends = node.parent
+	isAngularModuleType = (moduleType) ->
+		moduleType in moduleTypes
 
-		continue if not hasExtends
+	processNode = (node) ->
+		node    = node.expression if node.expression
+		body    = node.body
+		isClass = node.variable and node.parent and body?.classBody
 
-		className = node.variable.base.value
-		eExtends  = node.parent.base.value
-		isAngular = eExtends in moduleTypes
+		return if isClass
+			className = node.variable.base.value
+			parent    = node.parent
+			isExtends = parent?
 
-		continue if not isAngular
+			return if not isExtends
 
-		expression            = node.body.expressions[0]
-		hasConstructorParams  = expression.base?
-		constructorParameters = []
+			moduleType = parent.base.value
+			isAngular  = isAngularModuleType moduleType
 
-		if hasConstructorParams
-			constructorParams = {}
+			return if not isAngular
 
-			expression.base.properties.forEach (prop, i) ->
-				if prop.value
-					constructorParams = prop.value.params
+			classDetails.push {className, moduleType, parameters: []}
+			processNodes body.expressions
 
-			constructorParams.forEach (constructorParam) ->
-				name                 = constructorParam.name
-				properties           = name.properties
-				hasProperties        = properties?
-				constructorParameter = if hasProperties then properties[0].name.value else name.value
+		base          = node.base
+		hasProperties = base?.properties
 
-				constructorParameters.push "'#{constructorParameter}'"
+		return if hasProperties
+			processNodes base.properties
 
-		constructorParameters.push className
-		classDetails.push {className, moduleType: eExtends, parameters: constructorParameters}
+		isConstructor = node.value and node.variable?.base.value is 'constructor'
+
+		return if not isConstructor
+
+		params     = node.value.params
+		parameters = []
+
+		params.forEach (param) ->
+			isThis = param.name.this?
+
+			# handle @ (this)
+			return if isThis
+				properties = param.name.properties
+				props      = (property.name.value for property in properties)
+
+				parameters.push props
+
+			parameters.push param.name.value
+
+		# add parameters to last classDetail
+		classDetails[classDetails.length - 1].parameters = parameters
+
+		processNodes node.value.body.expressions
+
+	processNodes = (nodes) ->
+		processNode node for node in nodes
+
+	# add quotes around parameters
+	# add class as last parameter
+	normalizeParameters = ->
+		classDetails.forEach (details) ->
+			hasParameters = details.parameters?
+
+			return if not hasParameters
+
+			details.parameters[i] = "'#{parameter}'" for parameter, i in details.parameters
+
+			details.parameters.push details.className
+
+	processNodes nodes(content).expressions
+	normalizeParameters()
 
 	classDetails

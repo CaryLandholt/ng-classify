@@ -547,63 +547,63 @@ describe 'ng-classify', ->
 
 		expect(result).toEqual(expectation)
 
-	# it 'should compile multiple Controllers with comments and functions', ->
-	# 	input = '''
-	# 	###
-	# 	My Home Controller
-	# 	###
-	# 	cube = (x) ->
-	# 		x * x * x
-	#
-	# 	class Home extends Controller
-	# 		constructor: (@userService) ->
-	# 			@save = (username) ->
-	# 				userService.addUser username + cube(3)
-	#
-	# 	###
-	# 	My AnotherHome Controller
-	# 	###
-	# 	class AnotherHome extends Controller
-	# 		square = (x) ->
-	# 			x * x
-	#
-	# 		# the constructor
-	# 		constructor: (anotherService) ->
-	# 			@save = (username) ->
-	# 				userService.addUser username + square(2)
-	# 	'''
-	#
-	# 	result = ngClassify input
-	#
-	# 	expectation = '''
-	# 	###
-	# 	My Home Controller
-	# 	###
-	# 	cube = (x) ->
-	# 		x * x * x
-	#
-	# 	class Home
-	# 		constructor: (@userService) ->
-	# 			@save = (username) ->
-	# 				userService.addUser username + cube(3)
-	#
-	# 	###
-	# 	My AnotherHome Controller
-	# 	###
-	# 	class AnotherHome
-	# 		square = (x) ->
-	# 			x * x
-	#
-	# 		# the constructor
-	# 		constructor: (anotherService) ->
-	# 			@save = (username) ->
-	# 				userService.addUser username + square(2)
-	#
-	# 	angular.module('app').controller 'homeController', ['userService', Home]
-	# 	angular.module('app').controller 'anotherHomeController', ['anotherService', AnotherHome]
-	# 	'''
-	#
-	# 	expect(result).toEqual(expectation)
+	it 'should compile multiple Controllers with comments and functions', ->
+		input = '''
+		###
+		My Home Controller
+		###
+		cube = (x) ->
+			x * x * x
+
+		class Home extends Controller
+			constructor: (@userService) ->
+				@save = (username) ->
+					userService.addUser username + cube(3)
+
+		###
+		My AnotherHome Controller
+		###
+		class AnotherHome extends Controller
+			square = (x) ->
+				x * x
+
+			# the constructor
+			constructor: (anotherService) ->
+				@save = (username) ->
+					userService.addUser username + square(2)
+		'''
+
+		result = ngClassify input
+
+		expectation = '''
+		###
+		My Home Controller
+		###
+		cube = (x) ->
+			x * x * x
+
+		class Home
+			constructor: (@userService) ->
+				@save = (username) ->
+					userService.addUser username + cube(3)
+
+		###
+		My AnotherHome Controller
+		###
+		class AnotherHome
+			square = (x) ->
+				x * x
+
+			# the constructor
+			constructor: (anotherService) ->
+				@save = (username) ->
+					userService.addUser username + square(2)
+
+		angular.module('app').controller 'homeController', ['userService', Home]
+		angular.module('app').controller 'anotherHomeController', ['anotherService', AnotherHome]
+		'''
+
+		expect(result).toEqual(expectation)
 
 	it 'should leave standard classes as-is', ->
 		input = '''
@@ -630,3 +630,21 @@ describe 'ng-classify', ->
 		result = ngClassify input
 
 		expect(result).toEqual(input)
+
+	it 'should compile nested classes', ->
+		input = '''
+		class A extends Controller
+			constructor: (aa, ab) ->
+				return class AA extends Service
+					constructor: (aaa) ->
+						console.log 'perms'
+
+		class B extends Directive
+			constructor: (ba) ->
+				return class BA extends Factory
+					constructor: (baa, bab) ->
+						return class BAA extends Provider
+							constructor: (baaa) ->
+		'''
+
+		result = ngClassify input

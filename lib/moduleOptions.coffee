@@ -1,7 +1,7 @@
 extend = require 'node.extend'
 
-module.exports = (formatOptions, opt) ->
-	options =
+module.exports = (formatOptions, options) ->
+	moduleOptions =
 		appName: 'app'
 		formats:
 			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.animation.prefix}{{className|#{formatOptions.animation.format}}}#{formatOptions.animation.suffix}', [{{parameters}}]"
@@ -17,4 +17,4 @@ module.exports = (formatOptions, opt) ->
 			service: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.service.prefix}{{className|#{formatOptions.service.format}}}#{formatOptions.service.suffix}', [{{parameters}}]"
 			value: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.value.prefix}{{className|#{formatOptions.value.format}}}#{formatOptions.value.suffix}', {{parameters}}.constructor"
 
-	merged = extend true, options, opt
+	merged = extend true, moduleOptions, options

@@ -4,12 +4,12 @@ module.exports = (details, options) ->
 	compiled = []
 
 	parts.forEach (part) ->
-		filters = part.split '|'
+		filters   = part.split '|'
 		component = filters[0]
-		detail = details[component]
+		detail    = details[component]
 
 		if component is 'parameters'
-			detail = detail.join ', '
+			detail  = detail.join ', '
 			filters = filters.filter (filter, i) -> i > 0
 
 		for filter in filters when filters.length isnt 1
