@@ -1,3 +1,12 @@
+<a name="0.5.3"></a>
+### 0.5.3  (2014-05-04)
+
+
+#### Bug Fixes
+
+* **ng-classify:** use recursion to gather nested classes ([079f3404](https://github.com/CaryLandholt/ng-classify/commit/079f34040adab6350262611b1575f50c47d5bf00), closes [#4](https://github.com/CaryLandholt/ng-classify/issues/4))
+
+
 <a name="0.5.2"></a>
 ### 0.5.2  (2014-05-03)
 
