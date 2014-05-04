@@ -1,3 +1,19 @@
+<a name="1.0.0"></a>
+## 1.0.0  (2014-05-04)
+
+
+#### Bug Fixes
+
+* **content:**
+  * allow multiple classes ([253d2d1b](https://github.com/CaryLandholt/ng-classify/commit/253d2d1b43aa0fb8318603199c79a7f5f1c09ada), closes [#5](https://github.com/CaryLandholt/ng-classify/issues/5))
+  * allow multiple classes ([3dd0f4e2](https://github.com/CaryLandholt/ng-classify/commit/3dd0f4e25c3127033d29d16d1c94a14bc78e953c))
+
+
+#### Features
+
+* **moduleTypePrefix:** enable namespacing of moduleTypes ([49f46653](https://github.com/CaryLandholt/ng-classify/commit/49f46653ef243ac899be76835a8fa1504c638ad4))
+
+
 <a name="0.5.3"></a>
 ### 0.5.3  (2014-05-04)
 

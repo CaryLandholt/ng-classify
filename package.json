@@ -1,6 +1,6 @@
 {
 	"name": "ng-classify",
-	"version": "0.5.3",
+	"version": "1.0.0",
 	"description": "Compile CoffeeScript classes to AngularJS modules",
 	"author": {
 		"name": "Cary Landholt",
