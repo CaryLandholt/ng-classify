@@ -24,5 +24,5 @@ gulp.task 'test', ->
 		verbose: true
 
 	gulp
-		.src 'test.coffee'
+		.src '**/*.spec.coffee', cwd: 'test/'
 		.pipe jasmine options

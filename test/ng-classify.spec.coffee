@@ -1,4 +1,4 @@
-ngClassify = require './index'
+ngClassify = require '../index'
 
 describe 'ng-classify', ->
 	it 'should compile an Animation', ->
