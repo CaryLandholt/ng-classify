@@ -649,6 +649,18 @@ Default: `'app'`
 The name of the AngularJS app
 
 
+##### options.prefix
+Type: `String`
+Default: `''`
+
+To avoid potential collisions, the moduleType prefix may be set (ex: `options.prefix = 'Ng'`)
+```coffee
+class Home extends Ng.Controller
+	@constructor: ($log) ->
+		$log.info 'homeController instantiated'
+```
+
+
 ##### options.data
 Type: `Object`
 Default `undefined`
