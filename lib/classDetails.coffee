@@ -1,8 +1,7 @@
 coffeeScript = require 'coffee-script'
-moduleTypes  = require './moduleTypes'
 nodes        = coffeeScript.nodes
 
-module.exports = (content) ->
+module.exports = (content, moduleTypes) ->
 	classDetails = []
 
 	isAngularModuleType = (moduleType) ->
@@ -21,6 +20,15 @@ module.exports = (content) ->
 			return if not isExtends
 
 			moduleType = parent.base.value
+
+			# handle namespaces (e.g. Ng.Controller)
+			properties   = parent.properties
+			isNamespaced = properties.length > 0
+
+			if isNamespaced
+				namespaces = (property.name.value for property in properties)
+				moduleType += '.' + namespaces.join '.'
+
 			isAngular  = isAngularModuleType moduleType
 
 			return if not isAngular

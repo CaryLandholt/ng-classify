@@ -8,9 +8,10 @@ moduleTypes   = require './lib/moduleTypes'
 module.exports = (content, options) ->
 	formatOpts = formatOptions options
 	opts       = moduleOptions formatOpts, options
+	modTypes   = moduleTypes opts.prefix
 	content    = _.template content, opts.data if opts.data
 	appName    = opts.appName
-	details    = classDetails content
+	details    = classDetails content, modTypes
 	modules    = []
 
 	# add appName to moduleDetails
@@ -20,10 +21,10 @@ module.exports = (content, options) ->
 		modules.push moduleDetails detail, opts
 
 	# remove angular moduleTypes from content
-	moduleTypes.forEach (moduleType) ->
+	modTypes.forEach (moduleType) ->
 		searchFor = " extends #{moduleType}"
 		regex     = new RegExp searchFor, 'g'
-		content  = content.replace regex, ''
+		content   = content.replace regex, ''
 
 	content += '\n\n' if modules.length isnt 0
 	content += modules.join '\n'
