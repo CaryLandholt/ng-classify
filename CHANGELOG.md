@@ -1,3 +1,12 @@
+<a name="1.0.1"></a>
+### 1.0.1  (2014-05-04)
+
+
+#### Bug Fixes
+
+* **moduleTypePrefix:** remove prefix from moduleType when formatting ([f752ca7d](https://github.com/CaryLandholt/ng-classify/commit/f752ca7d4e17e5a6e83d281731f881a94668e3ae), closes [#7](https://github.com/CaryLandholt/ng-classify/issues/7))
+
+
 <a name="1.0.0"></a>
 ## 1.0.0  (2014-05-04)
 
