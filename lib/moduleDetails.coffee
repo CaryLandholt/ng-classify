@@ -1,9 +1,10 @@
 applyCaseFilters = require './applyCaseFilters'
 
 module.exports = (details, options) ->
-	format   = options.formats[details.moduleType.toLowerCase()]
-	parts    = format.split /{{(.*?)}}/
-	compiled = []
+	prefixLessModuleType = details.moduleType.split('.')[-1..][0]
+	format               = options.formats[prefixLessModuleType.toLowerCase()]
+	parts                = format.split /{{(.*?)}}/
+	compiled             = []
 
 	parts.forEach (part) ->
 		filters   = part.split '|'
@@ -16,7 +17,8 @@ module.exports = (details, options) ->
 
 		if filters.length > 1
 			filters = filters.slice(1)
-			detail  = applyCaseFilters detail, filters
+			key     = if component is 'moduleType' then prefixLessModuleType else detail
+			detail  = applyCaseFilters key, filters
 
 		compiled.push if detail then detail else component
 

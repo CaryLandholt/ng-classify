@@ -648,3 +648,41 @@ describe 'ng-classify', ->
 		'''
 
 		result = ngClassify input
+
+	it 'should compile with a moduleType prefix', ->
+		input = '''
+		class Home extends Ng.Controller
+			constructor: ($log) ->
+				$log.info 'controller with prefix'
+		'''
+
+		result = ngClassify input, prefix: 'Ng'
+
+		expectation = '''
+		class Home
+			constructor: ($log) ->
+				$log.info 'controller with prefix'
+
+		angular.module('app').controller 'homeController', ['$log', Home]
+		'''
+
+		expect(result).toEqual(expectation)
+
+	it 'should compile with a namespace with an ending period (.)', ->
+		input = '''
+		class Home extends Ng.My.Controller
+			constructor: ($log) ->
+				$log.info 'controller with prefix'
+		'''
+
+		result = ngClassify input, prefix: 'Ng.My.'
+
+		expectation = '''
+		class Home
+			constructor: ($log) ->
+				$log.info 'controller with prefix'
+
+		angular.module('app').controller 'homeController', ['$log', Home]
+		'''
+
+		expect(result).toEqual(expectation)

@@ -17,8 +17,9 @@ module.exports = (content, options) ->
 	# add appName to moduleDetails
 	details.forEach (detail) ->
 		detail.appName = appName
+		modDetails     = moduleDetails detail, opts
 
-		modules.push moduleDetails detail, opts
+		modules.push modDetails
 
 	# remove angular moduleTypes from content
 	modTypes.forEach (moduleType) ->
