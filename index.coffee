@@ -20,13 +20,20 @@ module.exports = (content, options) ->
 	# the following will result in
 	# class Home
 	getTrimmedContent = (contentLines, position) ->
-		row               = position.row
-		start             = position.start
-		lineContent       = contentLines[row]
-		line              = lineContent.slice 0, position.start + 1
-		contentLines[row] = line
+		# clone the original
+		lines       = contentLines.slice 0
+		row         = position.row
+		start       = position.start
+		end         = position.end
+		lineContent = lines[row]
+		characters  = lineContent.split ''
 
-		contentLines
+		delete characters[i] for i in [start + 1..end]
+
+		line       = characters.join ''
+		lines[row] = line
+
+		lines
 
 	# add appName to moduleDetails
 	details.forEach (detail) ->
