@@ -13,27 +13,36 @@ module.exports = (content, moduleTypes) ->
 		isClass = node.variable and node.parent and body?.classBody
 
 		return if isClass
-			className = node.variable.base.value
-			parent    = node.parent
-			isExtends = parent?
+			base          = node.variable.base
+			className     = base.value
+			classLocation = base.locationData
+			parent        = node.parent
+			isExtends     = parent?
+
+			position =
+				row: classLocation.last_line
+				start: classLocation.last_column
 
 			return if not isExtends
 
-			moduleType = parent.base.value
+			base         = parent.base
+			position.end = base.locationData.last_column
+			moduleType   = base.value
 
 			# handle namespaces (e.g. Ng.Controller)
 			properties   = parent.properties
 			isNamespaced = properties.length > 0
 
 			if isNamespaced
-				namespaces = (property.name.value for property in properties)
-				moduleType += '.' + namespaces.join '.'
+				position.end = property.locationData.last_column for property in properties
+				namespaces   = (property.name.value for property in properties)
+				moduleType  += '.' + namespaces.join '.'
 
 			isAngular  = isAngularModuleType moduleType
 
 			return if not isAngular
 
-			classDetails.push {className, moduleType, parameters: []}
+			classDetails.push {className, moduleType, parameters: [], position}
 			processNodes body.expressions
 
 		base          = node.base

@@ -16,6 +16,10 @@ describe 'classDetails', ->
 			parameters: [
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 28
 		]
 
 		expect(result).toEqual(expectation)
@@ -35,6 +39,10 @@ describe 'classDetails', ->
 			parameters: [
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 28
 		]
 
 		expect(result).toEqual(expectation)
@@ -55,6 +63,10 @@ describe 'classDetails', ->
 				"'$log'"
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 28
 		]
 
 		expect(result).toEqual(expectation)
@@ -76,6 +88,10 @@ describe 'classDetails', ->
 				"'$httpBackend'"
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 28
 		]
 
 		expect(result).toEqual(expectation)
@@ -97,6 +113,10 @@ describe 'classDetails', ->
 				"'$httpBackend'"
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 28
 		]
 
 		expect(result).toEqual(expectation)
@@ -115,6 +135,10 @@ describe 'classDetails', ->
 			parameters: [
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 31
 		]
 
 		expect(result).toEqual(expectation)
@@ -133,11 +157,15 @@ describe 'classDetails', ->
 			parameters: [
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 34
 		]
 
 		expect(result).toEqual(expectation)
 
-	it 'should collect class details with a and without an ending period (.) in the prefix', ->
+	it 'should collect class details with and without an ending period (.) in the prefix', ->
 		input = '''
 		class Home extends Ng.My.Controller
 			console.log 'no constructor'
@@ -151,6 +179,10 @@ describe 'classDetails', ->
 			parameters: [
 				'Home'
 			]
+			position:
+				row: 0
+				start: 9
+				end: 34
 		]
 
 		expect(result).toEqual(expectation)
