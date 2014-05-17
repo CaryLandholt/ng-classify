@@ -115,9 +115,9 @@ class Admin extends Controller
 
 ### Benefits
 * App name is not required when writing a module
-	- it is now configurable
+	* it is now configurable
 * Parameters are included once via the `constructor` function
-* No need to suffix the module name with the module type, e.g. my*Controller*
+	* No need to suffix the module name with the module type, e.g. my*Controller*
 * The function is named, making debugging more convenient
 * The syntax is arguably concise
 
