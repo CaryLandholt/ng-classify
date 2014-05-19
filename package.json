@@ -27,7 +27,7 @@
 		"node.extend": "~1.0.10"
 	},
 	"devDependencies": {
-		"conventional-changelog": "~0.0.8",
+		"conventional-changelog": "~0.0.9",
 		"gulp": "~3.6.2",
 		"gulp-jasmine": "~0.2.0",
 		"gulp-util": "~2.2.14"
