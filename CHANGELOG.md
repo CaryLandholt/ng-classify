@@ -1,3 +1,11 @@
+### 1.0.2 (2014-06-09)
+
+
+#### Bug Fixes
+
+* **index:** add bridge from js to coffee ([298aad76](https://github.com/CaryLandholt/ng-classify/commit/298aad76d3601b2942c405cb807e021612278fb8))
+
+
 <a name="1.0.1"></a>
 ### 1.0.1  (2014-05-04)
 
