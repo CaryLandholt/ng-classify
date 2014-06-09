@@ -1,4 +1,4 @@
-// This file is a simple bridge since gulp doesn't support CoffeeScript configurations natively.
+// This file is a bridge between JavaScript and CoffeeScript
 
 require('coffee-script').register();
 
