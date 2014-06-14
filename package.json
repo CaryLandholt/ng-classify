@@ -33,5 +33,15 @@
 	},
 	"scripts": {
 		"test": "gulp test"
-	}
+	},
+	"files": [
+		"lib",
+		"CHANGELOG.md",
+		"CONTRIBUTING.md",
+		"gulpfile.coffee",
+		"index.coffee",
+		"index.js",
+		"LICENSE",
+		"README.md"
+	]
 }
