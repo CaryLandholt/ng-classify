@@ -632,26 +632,27 @@ var angularModule = ngClassify(coffeeScriptClass);
 
 
 #### content
-Type: `String`
-Default: `undefined`
+*Required*  
+Type: `String`  
+Default: `undefined`  
 
 The content that may contain CoffeeScript classes to convert to AngularJS modules
 
 
 #### options
-Type: `Object`
+Type: `Object`  
 
 
 ##### options.appName
-Type: `String`
-Default: `'app'`
+Type: `String`  
+Default: `'app'`  
 
 The name of the AngularJS app
 
 
 ##### options.prefix
-Type: `String`
-Default: `''`
+Type: `String`  
+Default: `''`  
 
 To avoid potential collisions, the moduleType prefix may be set (ex: `options.prefix = 'Ng'`)
 ```coffee
@@ -661,81 +662,49 @@ class Home extends Ng.Controller
 ```
 
 
-##### options.data
-Type: `Object`
-Default `undefined`
-
-An object used for compiling [Lo-Dash templates](http://lodash.com/docs#template).
-If the CoffeeScript file contains Lo-Dash template methods, they will be compiled prior to ng-classify with this object.
-
-The following shows an example of conditionally including the AngularJS module, ngMockE2E, if the environment is `'dev'`.
-It will not be included if environment is anything other than `'dev'`.
-
-```coffee
-class App extends App
-	@constructor = [
-		'ngAnimate'
-		<% if (environment === 'dev') { %>'ngMockE2E'<% } %>
-		'ngRoute'
-	]
-```
-
-The above class would be compiled using the command below.
-```coffee
-ngClassify = require 'ng-classify'
-coffeeScriptClass = '{{CoffeeScript Class as a String}}'
-
-options =
-	data:
-		environment: 'dev'
-
-angularModule = ngClassify coffeeScriptClass, options
-```
-
-
 ##### options.animation
-Type: `Object`
-Default: `{format: 'spinalCase', prefix: '.'}`
+Type: `Object`  
+Default: `{format: 'spinalCase', prefix: '.'}`  
 
 
 ##### options.constant
-Type: `Object`
-Default: `{format: 'screamingSnakeCase'}`
+Type: `Object`  
+Default: `{format: 'screamingSnakeCase'}`  
 
 
 ##### options.controller
-Type: `Object`
-Default: `{format: 'camelCase', suffix: 'Controller'}`
+Type: `Object`  
+Default: `{format: 'camelCase', suffix: 'Controller'}`  
 
 
 ##### options.directive
-Type: `Object`
-Default: `{format: 'camelCase'}`
+Type: `Object`  
+Default: `{format: 'camelCase'}`  
 
 
 ##### options.factory
-Type: `Object`
-Default: `{format: 'upperCamelCase'}`
+Type: `Object`  
+Default: `{format: 'upperCamelCase'}`  
 
 
 ##### options.filter
-Type: `Object`
-Default: `{format: 'camelCase'}`
+Type: `Object`  
+Default: `{format: 'camelCase'}`  
 
 
 ##### options.provider
-Type: `Object`
-Default: `{format: 'camelCase', suffix: 'Provider'}`
+Type: `Object`  
+Default: `{format: 'camelCase', suffix: 'Provider'}`  
 
 
 ##### options.service
-Type: `Object`
-Default: `{format: 'camelCase', suffix: 'Service'}`
+Type: `Object`  
+Default: `{format: 'camelCase', suffix: 'Service'}`  
 
 
 ##### options.value
-Type: `Object`
-Default: `{format: 'camelCase'}`
+Type: `Object`  
+Default: `{format: 'camelCase'}`  
 
 
 ### Supported Formats

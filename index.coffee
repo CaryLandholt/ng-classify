@@ -1,4 +1,3 @@
-_             = require 'lodash'
 classDetails  = require './lib/classDetails'
 formatOptions = require './lib/formatOptions'
 moduleDetails = require './lib/moduleDetails'
@@ -9,14 +8,13 @@ module.exports = (content, options) ->
 	formatOpts   = formatOptions options
 	opts         = moduleOptions formatOpts, options
 	modTypes     = moduleTypes opts.prefix
-	content      = _.template content, opts.data if opts.data
 	appName      = opts.appName
 	details      = classDetails content, modTypes
-	modules      = []
 	contentLines = content.split '\n'
 
 	# take the following class line
 	# class Home extends Controler
+	#
 	# the following will result in
 	# class Home
 	getTrimmedContent = (contentLines, position) ->
@@ -36,12 +34,12 @@ module.exports = (content, options) ->
 		lines
 
 	# add appName to moduleDetails
-	details.forEach (detail) ->
+	modules = for detail in details
 		detail.appName = appName
 		modDetails     = moduleDetails detail, opts
 		contentLines   = getTrimmedContent contentLines, detail.position
-
-		modules.push modDetails
+		
+		modDetails
 
 	ngClassified  = contentLines.join '\n'
 	ngClassified += '\n\n' if modules.length isnt 0

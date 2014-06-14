@@ -23,14 +23,13 @@
 	},
 	"dependencies": {
 		"coffee-script": "~1.7.1",
-		"lodash": "~2.4.1",
 		"node.extend": "~1.0.10"
 	},
 	"devDependencies": {
-		"conventional-changelog": "~0.0.9",
-		"gulp": "~3.6.2",
+		"conventional-changelog": "~0.0.11",
+		"gulp": "~3.8.0",
 		"gulp-jasmine": "~0.2.0",
-		"gulp-util": "~2.2.14"
+		"gulp-util": "~2.2.17"
 	},
 	"scripts": {
 		"test": "gulp test"
