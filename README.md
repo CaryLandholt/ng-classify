@@ -1,8 +1,71 @@
-# ng-classify [![Version][version-image]][version-url] [![Build Status][build-image]][build-url] [![Dependency Status][dependencies-image]][dependencies-url] [![License][license-image]][license-url]
-> Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules
+# ng-classify
+[![License][license-image]][license-url]
+[![Version][version-image]][version-url]
+[![Build Status][build-image]][build-url]
+[![Dependency Status][dependencies-image]][dependencies-url]
+> Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules  
+> Write less JavaScript.  Write less CoffeeScript.  Write less Angular.
+
+
+## Install
+Install with [npm](https://npmjs.org/package/ng-classify)
+
+```bash
+$ npm install ng-classify
+```
+
+
+## Usage
+
+
+### CoffeeScript
+```coffee
+ngClassify = require 'ng-classify'
+
+content = '''
+class Home extends Controller
+	constructor: ($log) ->
+		$log.info 'homeController instantiated'
+'''
+
+angularModule = ngClassify content
+```
+
+### JavaScript
+```javascript
+var ngClassify = require('ng-classify');
+
+var content = '\
+class Home extends Controller\n\
+	constructor: ($log) ->\n\
+		$log.info \'homeController instantiated\'\
+';
+
+var angularModule = ngClassify(content);
+```
+
+
+### Gulp
+[gulp-ng-classify](https://www.npmjs.org/package/gulp-ng-classify)
+```bash
+$ npm install gulp-ng-classify
+```
+
+
+### Grunt
+[grunt-ng-classify](https://www.npmjs.org/package/grunt-ng-classify)
+```bash
+$ npm install grunt-ng-classify
+```
 
 
 ## Table of Contents
+* [Install](#install)
+* [Usage](#usage)
+	- [CoffeeScript](#coffeescript)
+	- [JavaScript](#javascript)
+	- [Gulp](#gulp)
+	- [Grunt](#grunt)
 * [Overview](#overview)
 	- [Why?](#why)
 	- [How?](#how)
@@ -23,10 +86,6 @@
 	- [Run](#run)
 	- [Service](#service)
 	- [Value](#value)
-* [Installing](#installing)
-* [Examples](#examples)
-	- [CoffeeScript](#coffeescript)
-	- [JavaScript](#javascript)
 * [API](#api)
 * [Contributing](#contributing)
 * [Changelog](#changelog)
@@ -67,14 +126,14 @@ So what's wrong with this?
 * Parameter names are duplicated, one for the getters, `'$scope', 'someService'`, and one for the function parameters, `function ($scope, someService)`
 	- this duplication is required to make the module minifiable
 	- some avoid this by the use of [ngmin](https://github.com/btford/ngmin)
-* Depending upon the employed naming format, module type, `controller`, and module name, `adminController`, have duplication, due to the suffixed `controller` in this example
+* Depending upon the desired naming format, module type (`controller`) and module name (`adminController`) have duplication, due to the suffixed `controller` in this example
 * The function is anonymous (unnamed), making it more difficult to debug
 * Generally verbose
 
 
 ### How?
 Write AngularJS modules using the following syntaxes.
-NOTE: `{{placeholder}}` denotes placeholders
+NOTE: `{{}}` denotes placeholders
 ```coffee
 class {{appName}} extends {{App|Animation|Config|Controller|Directive|Factory|Filter|Provider|Run|Service}}
 	constructor: ({{params}}) ->
@@ -114,6 +173,7 @@ class Admin extends Controller
 
 
 ### Benefits
+* Removes unnecessary ceremonial code (`angular.module('app')`)
 * App name is not required when writing a module
 	- it is now configurable
 * Parameters are included once via the `constructor` function
@@ -599,43 +659,6 @@ angular.module('app').value('people',
 );
 ```
 
-
-## Installing
-Install with [npm](https://npmjs.org/package/ng-classify)
-
-```bash
-$ npm install --save-dev ng-classify
-```
-
-
-## Examples
-
-
-### CoffeeScript
-```coffee
-ngClassify = require 'ng-classify'
-
-content = '''
-class Home extends Controller
-	constructor: ($log) ->
-		$log.info 'homeController instantiated'
-'''
-
-angularModule = ngClassify content
-```
-
-### JavaScript
-```javascript
-var ngClassify = require('ng-classify');
-
-var content = '\
-class Home extends Controller\n\
-	constructor: ($log) ->\n\
-		$log.info \'homeController instantiated\'\
-';
-
-var angularModule = ngClassify(content);
-```
 
 ## API
 
