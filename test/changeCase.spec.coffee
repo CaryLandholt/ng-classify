@@ -1,6 +1,20 @@
 changeCase = require '../lib/changeCase'
 
 describe 'formatOptions', ->
+	it 'should not change the source casing', ->
+		format      = '*'
+		input       = 'myInput'
+		result      = changeCase input, format
+		expectation = 'myInput'
+
+		expect(result).toEqual(expectation)
+
+		input       = 'MyInput'
+		result      = changeCase input, format
+		expectation = 'MyInput'
+
+		expect(result).toEqual(expectation)
+	
 	it 'should change to camelCase', ->
 		format      = 'camelCase'
 		input       = 'myInput'

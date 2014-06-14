@@ -1,6 +1,9 @@
 caseChangeRegEx = /([a-z\d])([A-Z])/g
 
 module.exports = (input, caseFormat) ->
+	return if caseFormat is '*'
+		input
+	
 	return if caseFormat in ['camelCase', 'lowerCamelCase']
 		input[0].toLowerCase() + input[1..]
 

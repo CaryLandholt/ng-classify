@@ -641,6 +641,7 @@ The content that may contain CoffeeScript classes to convert to AngularJS module
 
 #### options
 Type: `Object`  
+Default: `undefined`  
 
 
 ##### options.appName
@@ -710,6 +711,7 @@ Default: `{format: 'camelCase'}`
 ### Supported Formats
 Format | Example
 --- | ---
+* | *no change*
 camelCase | camelCase
 lowerCamelCase | lowerCamelCase
 lowerCase | lowercase
