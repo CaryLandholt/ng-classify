@@ -1,3 +1,21 @@
+## 2.0.0 (2014-06-13)
+
+
+#### Features
+
+* **data:** leverage other modules ([ee70d196](https://github.com/CaryLandholt/ng-classify/commit/ee70d196e5671955345a4b5b7c55d86441bce28c))
+* **format:** add * format option ([dcc2029c](https://github.com/CaryLandholt/ng-classify/commit/dcc2029c0cec3ff268e69f1b236a88498e2d58ae))
+
+
+#### Breaking Changes
+
+* options.data deprecated
+
+Use gulp-template or another similar library instead
+
+ ([ee70d196](https://github.com/CaryLandholt/ng-classify/commit/ee70d196e5671955345a4b5b7c55d86441bce28c))
+
+
 ### 1.0.2 (2014-06-09)
 
 
