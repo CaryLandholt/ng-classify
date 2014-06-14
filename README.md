@@ -614,15 +614,27 @@ $ npm install --save-dev ng-classify
 ### CoffeeScript
 ```coffee
 ngClassify = require 'ng-classify'
-coffeeScriptClass = '{{CoffeeScript Class as a String}}'
-angularModule = ngClassify coffeeScriptClass
+
+content = '''
+class Home extends Controller
+	constructor: ($log) ->
+		$log.info 'homeController instantiated'
+'''
+
+angularModule = ngClassify content
 ```
 
 ### JavaScript
 ```javascript
 var ngClassify = require('ng-classify');
-var coffeeScriptClass = '{{CoffeeScript Class as a String}}';
-var angularModule = ngClassify(coffeeScriptClass);
+
+var content = '\
+class Home extends Controller\n\
+	constructor: ($log) ->\n\
+		$log.info \'homeController instantiated\'\
+';
+
+var angularModule = ngClassify(content);
 ```
 
 ## API
