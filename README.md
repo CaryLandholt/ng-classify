@@ -228,10 +228,11 @@ view for `this` example
 *Although there is no AngularJS App module type, it is included for consistency.*
 ```coffee
 class App extends App
-	@constructor = [
-		'ngAnimate'
-		'ngRoute'
-	]
+	constructor: ->
+		return [
+			'ngAnimate'
+			'ngRoute'
+		]
 ```
 
 equivalent to
