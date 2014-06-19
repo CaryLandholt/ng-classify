@@ -5,7 +5,7 @@ module.exports = (formatOptions, options) ->
 		appName: 'app'
 		formats:
 			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.animation.prefix}{{className|#{formatOptions.animation.format}}}#{formatOptions.animation.suffix}', [{{parameters}}]"
-			app: "angular.module '{{appName}}', {{parameters}}.constructor"
+			app: "angular.module '{{appName}}', {{className}}()"
 			config: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
 			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.constant.prefix}{{className|#{formatOptions.constant.format}}}#{formatOptions.constant.suffix}', {{parameters}}.constructor"
 			controller: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.controller.prefix}{{className|#{formatOptions.controller.format}}}#{formatOptions.controller.suffix}', [{{parameters}}]"

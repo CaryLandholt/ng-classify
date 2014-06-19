@@ -39,16 +39,24 @@ describe 'ng-classify', ->
 	it 'should compile an App', ->
 		input = '''
 		class App extends App
-			@constructor = []
+			constructor: ->
+				return [
+					'ngAnimate'
+					'ngRoute'
+				]
 		'''
 
 		result = ngClassify input
 
 		expectation = '''
 		class App
-			@constructor = []
+			constructor: ->
+				return [
+					'ngAnimate'
+					'ngRoute'
+				]
 
-		angular.module 'app', App.constructor
+		angular.module 'app', App()
 		'''
 
 		expect(result).toEqual(expectation)
