@@ -193,3 +193,25 @@ describe 'classDetails', ->
 		expect(result[0].moduleType).toEqual('Ng.My.Controller')
 		expect(result[0].moduleType).not.toEqual('Ng.My..Controller')
 		expect(result[0].moduleType).not.toEqual('Ng.MyController')
+		
+	it 'should collect class details with a do in the constructor', ->
+		input = '''
+		class Home extends Controller
+			constructor: do ->
+		'''
+
+		result = classDetails input, moduleTypes('')
+
+		expectation = [
+			className: 'Home'
+			moduleType: 'Controller'
+			parameters: [
+				'Home'
+			]
+			position:
+				row: 0
+				start: 9
+				end: 28
+		]
+
+		expect(result).toEqual(expectation)

@@ -686,3 +686,20 @@ describe 'ng-classify', ->
 		'''
 
 		expect(result).toEqual(expectation)
+
+	it 'should compile with a do in the constructor', ->
+		input = '''
+		class Home extends Controller
+			constructor: do ->
+		'''
+
+		result = ngClassify input
+
+		expectation = '''
+		class Home
+			constructor: do ->
+
+		angular.module('app').controller 'homeController', [Home]
+		'''
+
+		expect(result).toEqual(expectation)

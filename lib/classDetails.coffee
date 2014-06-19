@@ -20,7 +20,7 @@ module.exports = (content, moduleTypes) ->
 			isExtends     = parent?
 
 			position =
-				row: classLocation.last_line
+				row:   classLocation.last_line
 				start: classLocation.last_column
 
 			return if not isExtends
@@ -56,7 +56,11 @@ module.exports = (content, moduleTypes) ->
 		return if not isConstructor
 
 		params     = node.value.params
+		isDo       = node.value.do?
 		parameters = []
+
+		return if isDo
+			classDetails[classDetails.length - 1].parameters = parameters
 
 		params.forEach (param) ->
 			isThis = param.name.this?
