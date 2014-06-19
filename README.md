@@ -135,7 +135,7 @@ So what's wrong with this?
 Write AngularJS modules using the following syntaxes.
 NOTE: `{{}}` denotes placeholders
 ```coffee
-class {{appName}} extends {{App|Animation|Config|Controller|Directive|Factory|Filter|Provider|Run|Service}}
+class {{appName}} extends {{Animation|Config|Controller|Directive|Factory|Filter|Provider|Run|Service}}
 	constructor: ({{params}}) ->
 		# module body here
 ```
@@ -143,7 +143,8 @@ class {{appName}} extends {{App|Animation|Config|Controller|Directive|Factory|Fi
 or
 ```coffee
 class {{name}} extends {{App|Constant|Value}}
-	@constructor = {{value}}
+	constructor: ->
+		return {{value}}
 ```
 
 
@@ -390,7 +391,7 @@ Notice the `return class` statement inside the first constructor function.  This
 ```coffee
 class Collection extends Factory
 	constructor: ($log) ->
-		return class
+		return class CollectionInstance
 			constructor: (collection) ->
 				isUndefined = angular.isUndefined collection
 
