@@ -1,3 +1,63 @@
+## 3.0.0 (2014-06-18)
+
+
+#### Bug Fixes
+
+* **classDetails:** add support for do in the constructor ([38b088f9](https://github.com/CaryLandholt/ng-classify/commit/38b088f9e40e1c8f6c813cf386614fbfe5d22b4b), closes [#8](https://github.com/CaryLandholt/ng-classify/issues/8))
+
+
+#### Breaking Changes
+
+* use return value from constructor
+
+Before:
+```coffee
+class MyValue extends Value
+  @constructor = 'Hello'
+```
+
+After:
+```coffee
+class MyValue extends Value
+  constructor: ->
+    return 'Hello'
+```
+
+ ([b9e85814](https://github.com/CaryLandholt/ng-classify/commit/b9e85814f1b9957cf7647df31e9a1695af3ef337))
+* use return value from constructor
+
+Before:
+```coffee
+class MyConst extends Constant
+  @constructor = []
+```
+
+After:
+```coffee
+class MyConst extends Constant
+  constructor: ->
+    return []
+```
+
+ ([3620e03b](https://github.com/CaryLandholt/ng-classify/commit/3620e03b35f61b6b9670eb1e5b4cc4848224736d))
+* use return value from constructor
+
+Before:
+```coffee
+class App extends App
+  @constructor = []
+```
+
+After:
+```coffee
+class App extends App
+  constructor: ->
+    return []
+```
+
+ ([fda5a79b](https://github.com/CaryLandholt/ng-classify/commit/fda5a79b12014893110916c10df017fd594fbc65))
+
+
 ## 2.0.0 (2014-06-13)
 
 
