@@ -387,34 +387,36 @@ describe 'ng-classify', ->
 	it 'should compile a Value', ->
 		input = '''
 		class People extends Value
-			@constructor = [
-				{
-					name: 'Luke Skywalker'
-					age: 26
-				}
-				{
-					name: 'Han Solo'
-					age: 35
-				}
-			]
+			constructor: ->
+				return [
+					{
+						name: 'Luke Skywalker'
+						age: 26
+					}
+					{
+						name: 'Han Solo'
+						age: 35
+					}
+				]
 		'''
 
 		result = ngClassify input
 
 		expectation = '''
 		class People
-			@constructor = [
-				{
-					name: 'Luke Skywalker'
-					age: 26
-				}
-				{
-					name: 'Han Solo'
-					age: 35
-				}
-			]
+			constructor: ->
+				return [
+					{
+						name: 'Luke Skywalker'
+						age: 26
+					}
+					{
+						name: 'Han Solo'
+						age: 35
+					}
+				]
 
-		angular.module('app').value 'people', People.constructor
+		angular.module('app').value 'people', People()
 		'''
 
 		expect(result).toEqual(expectation)

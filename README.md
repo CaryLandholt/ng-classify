@@ -634,16 +634,17 @@ angular.module('app').service('greetingService', ['$log',
 ### Value
 ```coffee
 class People extends Value
-	@constructor = [
-		{
-			name: 'Luke Skywalker'
-			age: 26
-		}
-		{
-			name: 'Han Solo'
-			age: 35
-		}
-	]
+	constructor: ->
+		return [
+			{
+				name: 'Luke Skywalker'
+				age: 26
+			}
+			{
+				name: 'Han Solo'
+				age: 35
+			}
+		]
 ```
 
 equivalent to

@@ -15,7 +15,7 @@ module.exports = (formatOptions, options) ->
 			provider: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.provider.prefix}{{className|#{formatOptions.provider.format}}}#{formatOptions.provider.suffix}', [{{parameters}}]"
 			run: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
 			service: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.service.prefix}{{className|#{formatOptions.service.format}}}#{formatOptions.service.suffix}', [{{parameters}}]"
-			value: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.value.prefix}{{className|#{formatOptions.value.format}}}#{formatOptions.value.suffix}', {{parameters}}.constructor"
+			value: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.value.prefix}{{className|#{formatOptions.value.format}}}#{formatOptions.value.suffix}', {{className}}()"
 		prefix: ''
 
 	merged = extend true, moduleOptions, options
