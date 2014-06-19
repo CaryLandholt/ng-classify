@@ -320,10 +320,12 @@ angular.module('app').config(['$routeProvider',
 ### Constant
 ```coffee
 class HttpStatusCodes extends Constant
-	@constructor =
-		'401': 'Unauthorized'
-		'403': 'Forbidden'
-		'404': 'Not Found'
+	constructor: ->
+		return {
+			'401': 'Unauthorized'
+			'403': 'Forbidden'
+			'404': 'Not Found'
+		}
 ```
 
 equivalent to

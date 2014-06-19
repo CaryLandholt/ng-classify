@@ -99,22 +99,26 @@ describe 'ng-classify', ->
 	it 'should compile a Constant', ->
 		input = '''
 		class HttpStatusCodes extends Constant
-			@constructor =
-				'401': 'Unauthorized'
-				'403': 'Forbidden'
-				'404': 'Not Found'
+			constructor: ->
+				return {
+					'401': 'Unauthorized'
+					'403': 'Forbidden'
+					'404': 'Not Found'
+				}
 		'''
 
 		result = ngClassify input
 
 		expectation = '''
 		class HttpStatusCodes
-			@constructor =
-				'401': 'Unauthorized'
-				'403': 'Forbidden'
-				'404': 'Not Found'
+			constructor: ->
+				return {
+					'401': 'Unauthorized'
+					'403': 'Forbidden'
+					'404': 'Not Found'
+				}
 
-		angular.module('app').constant 'HTTP_STATUS_CODES', HttpStatusCodes.constructor
+		angular.module('app').constant 'HTTP_STATUS_CODES', HttpStatusCodes()
 		'''
 
 		expect(result).toEqual(expectation)

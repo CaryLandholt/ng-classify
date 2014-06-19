@@ -7,7 +7,7 @@ module.exports = (formatOptions, options) ->
 			animation: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.animation.prefix}{{className|#{formatOptions.animation.format}}}#{formatOptions.animation.suffix}', [{{parameters}}]"
 			app: "angular.module '{{appName}}', {{className}}()"
 			config: "angular.module('{{appName}}').{{moduleType|lowerCase}} [{{parameters}}]"
-			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.constant.prefix}{{className|#{formatOptions.constant.format}}}#{formatOptions.constant.suffix}', {{parameters}}.constructor"
+			constant: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.constant.prefix}{{className|#{formatOptions.constant.format}}}#{formatOptions.constant.suffix}', {{className}}()"
 			controller: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.controller.prefix}{{className|#{formatOptions.controller.format}}}#{formatOptions.controller.suffix}', [{{parameters}}]"
 			directive: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.directive.prefix}{{className|#{formatOptions.directive.format}}}#{formatOptions.directive.suffix}', [{{parameters}}]"
 			factory: "angular.module('{{appName}}').{{moduleType|lowerCase}} '#{formatOptions.factory.prefix}{{className|#{formatOptions.factory.format}}}#{formatOptions.factory.suffix}', [{{parameters}}]"
