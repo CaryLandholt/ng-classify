@@ -97,7 +97,7 @@ $ npm install grunt-ng-classify
 ## Overview
 [AngularJS](http://angularjs.org/) is well suited to take advantage of the [CoffeeScript class](http://coffeescript.org/#classes) syntax.
 However there's still a bit of boilerplate code we have to work through.
-ng-classify addresses this.
+ng-classify addresses this.  *Note:  all examples are valid CoffeeScript.*
 
 Here's how you write a controller using ng-classify
 ```coffee
