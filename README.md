@@ -5,6 +5,8 @@
 [![Dependency Status][dependencies-image]][dependencies-url]
 > Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules  
 > Write less JavaScript.  Write less CoffeeScript.  Write less Angular.
+>
+> Watch the [screencast](https://www.youtube.com/watch?v=28gUTu9vnB4)
 
 
 ## Install
@@ -95,7 +97,7 @@ $ npm install grunt-ng-classify
 ## Overview
 [AngularJS](http://angularjs.org/) is well suited to take advantage of the [CoffeeScript class](http://coffeescript.org/#classes) syntax.
 However there's still a bit of boilerplate code we have to work through.
-ng-classify makes it easy.
+ng-classify addresses this.
 
 Here's how you write a controller using ng-classify
 ```coffee
@@ -151,6 +153,7 @@ class {{name}} extends {{App|Constant|Value}}
 ### CoffeeScript Classes
 The typical way to use CoffeeScript classes with AngularJS is as follows.
 ```coffee
+# 203 characters
 class AdminController
 	constructor: ($scope, someService) ->
 		$scope.coolMethod = someService.coolMethod()
@@ -160,13 +163,15 @@ angular.module('app').controller 'adminController', ['$scope', 'someService', Ad
 
 which is equivalent to
 ```javascript
-angular.module('app').controller('adminController', ['$scope', 'someService', function AdminController($scope, someService) {
+// 177 characters
+angular.module('app').controller('adminController', ['$scope', 'someService', function AdminController ($scope, someService) {
 	$scope.coolMethod = someService.coolMethod();
 }]);
 ```
 
 with ng-classify, this is all you need
 ```coffee
+# 116 characters
 class Admin extends Controller
 	constructor: ($scope, someService) ->
 		$scope.coolMethod = someService.coolMethod()
@@ -175,12 +180,11 @@ class Admin extends Controller
 
 ### Benefits
 * Removes unnecessary ceremonial code (`angular.module('app')`)
-* App name is not required when writing a module
-	- it is now configurable
-* Parameters are included once via the `constructor` function
-* No need to suffix the module name with the module type, e.g. my*Controller*
+* App name is not required when writing a module.  It is now configurable.
+* Parameters are needed only once via the `constructor` function.  No need for the array syntax to make your code minifiable.
+* No need to suffix the module name with the module type, e.g. my*Controller*, my*Ctrl*, etc.
 * The function is named, making debugging more convenient
-* The syntax is arguably concise
+* The syntax is arguably concise.  Bring your code to the forefront with the elimination of cruft.
 
 
 ### Considerations
@@ -244,6 +248,16 @@ angular.module('app', [
 ]);
 ```
 
+You may wish to use the `then` CoffeeScript syntax to highlight your code even more by eliminating the need for extra lines of code and indentation, as follows.  *Note:  this can be leveraged for any CoffeeScript class.*
+```coffee
+class App extends App then constructor: -> return [
+	'ngAnimate'
+	'ngRoute'
+]
+```
+
+*Note:  the app name is configured via the [appName](#optionsappname) option, not the class name*
+
 
 ### Animation
 ```coffee
@@ -262,23 +276,21 @@ class MyCrazyFader extends Animation
 
 equivalent to
 ```javascript
-angular.module('app').animation('.my-crazy-fader', [
-	function MyCrazyFader() {
-		return {
-			enter: function (element, done) {
-				// run the animation here and call done when the animation is complete
+angular.module('app').animation('.my-crazy-fader', [function MyCrazyFader () {
+	return {
+		enter: function (element, done) {
+			// run the animation here and call done when the animation is complete
 
-				var cancellation = function (element) {
-					// this (optional) function will be called when the animation
-					// completes or when the animation is cancelled (the cancelled
-					// flag will be set to true if cancelled).
-				};
+			var cancellation = function (element) {
+				// this (optional) function will be called when the animation
+				// completes or when the animation is cancelled (the cancelled
+				// flag will be set to true if cancelled).
+			};
 
-				return cancellation;
-			}
-		};
-	}
-]);
+			return cancellation;
+		}
+	};
+}]);
 ```
 
 
@@ -299,22 +311,20 @@ class Routes extends Config
 
 equivalent to
 ```javascript
-angular.module('app').config(['$routeProvider',
-	function Routes($routeProvider) {
-		$routeProvider
-		.when('/home', {
-			controller: 'homeController',
-			templateUrl: 'home.html'
-		})
-		.when('/about', {
-			controller: 'aboutController',
-			templateUrl: 'about.html'
-		})
-		.otherwise({
-			redirectTo: '/home'
-		});
-	}
-]);
+angular.module('app').config(['$routeProvider', function Routes ($routeProvider) {
+	$routeProvider
+	.when('/home', {
+		controller: 'homeController',
+		templateUrl: 'home.html'
+	})
+	.when('/about', {
+		controller: 'aboutController',
+		templateUrl: 'about.html'
+	})
+	.otherwise({
+		redirectTo: '/home'
+	});
+}]);
 ```
 
 
@@ -350,13 +360,11 @@ class Home extends Controller
 
 equivalent to
 ```javascript
-angular.module('app').controller('homeController', ['userService',
-	function Home(userService) {
-		this.save = function (username) {
-			return userService.addUser(username);
-		};
-	}
-]);
+angular.module('app').controller('homeController', ['userService', function Home (userService) {
+	this.save = function (username) {
+		return userService.addUser(username);
+	};
+}]);
 ```
 
 
@@ -373,164 +381,51 @@ class Dialog extends Directive
 
 equivalent to
 ```javascript
-angular.module('app').directive('dialog', [
-	function Dialog() {
-		return {
-			restrict: 'E',
-			transclude: true,
-			templateUrl: 'dialog.html'
-		};
-	}
-]);
+angular.module('app').directive('dialog', [function Dialog () {
+	return {
+		restrict: 'E',
+		transclude: true,
+		templateUrl: 'dialog.html'
+	};
+}]);
 ```
 
 
 ### Factory
-Although the following is a large example, it illustrates the use of the `new` keyword with Factories.
-Notice the `return class` statement inside the first constructor function.  This provides the ability to create a new instance of the class.  *Note: this is not required*
 ```coffee
-class Collection extends Factory
+class Greeting extends Factory
 	constructor: ($log) ->
-		return class CollectionInstance
-			constructor: (collection) ->
-				isUndefined = angular.isUndefined collection
-
-				if isUndefined
-					collection = []
-
-				isArray = angular.isArray collection
-
-				if not isArray
-					throw new Error 'Collection must be an array'
-
-				$log.debug 'creating collection', collection
-
-				originalCollection = angular.copy collection
-
-				@append = (item) ->
-					$log.debug "appending \"#{item}\" to", collection
-					collection.push item
-					@
-
-				@get = ->
-					$log.debug 'getting collection', collection
-					collection
-
-				@getOriginal = ->
-					$log.debug 'getting original collection', originalCollection
-					originalCollection
-
-				@prepend = (item) ->
-					$log.debug "prepending \"#{item}\" to", collection
-					collection.unshift item
-					@
-
-				@sort = (direction = 'asc') ->
-					$log.debug "sorting by \"#{direction}\"", collection
-
-					directions = ['asc', 'desc']
-					isValidDirection = directions.indexOf(direction) isnt -1
-
-					if not isValidDirection
-						throw new Error "Direction must be either asc or desc.  \"#{direction}\" passed"
-
-					if direction is 'asc'
-						collection.sort()
-					else
-						collection.reverse()
-
-					@
+		return {
+			sayHello: (name) ->
+				$log.info name
+		}
 ```
 
 equivalent to
 ```javascript
-angular.module('app').factory('Collection', ['$log',
-	function Collection($log) {
-		return (function () {
-			function _Class(collection) {
-				var isUndefined = angular.isUndefined(collection);
+angular.module('app').factory('Greeting', ['$log', function Greeting ($log) {
+	return {
+		sayHello: function (name) {
+			$log.info(name);
+		}
+	};
+}]);
+```
 
-				if (isUndefined) {
-					collection = [];
-				}
-
-				var isArray = angular.isArray(collection);
-
-				if (!isArray) {
-					throw new Error('Collection must be an array');
-				}
-
-				$log.debug('creating collection', collection);
-
-				var originalCollection = angular.copy(collection);
-
-				this.append = function (item) {
-					$log.debug("appending \"" + item + "\" to", collection);
-					collection.push(item);
-
-					return this;
-				};
-
-				this.get = function () {
-					$log.debug('getting collection', collection);
-
-					return collection;
-				};
-
-				this.getOriginal = function () {
-					$log.debug('getting original collection', originalCollection);
-
-					return originalCollection;
-				};
-
-				this.prepend = function (item) {
-					$log.debug("prepending \"" + item + "\" to", collection);
-					collection.unshift(item);
-
-					return this;
-				};
-
-				this.sort = function (direction) {
-					if (direction == null) {
-						direction = 'asc';
-					}
-
-					$log.debug("sorting by \"" + direction + "\"", collection);
-
-					var directions = ['asc', 'desc'];
-
-					var isValidDirection = directions.indexOf(direction) !== -1;
-
-					if (!isValidDirection) {
-						throw new Error("Direction must be either asc or desc.  \"" + direction + "\" passed");
-					}
-
-					if (direction === 'asc') {
-						collection.sort();
-					} else {
-						collection.reverse();
-					}
-
-					return this;
-				};
-			}
-
-			return CollectionInstance;
-		})();
-	}
-]);
+Another nice feature is the ability to **return** classes
+```coffee
+class User extends Factory
+	constructor: ($log) ->
+		return class UserInstance
+			constructor: (firstName, lastName) ->
+				@getFullName = ->
+					"#{firstName} #{lastName}"
 ```
 
 usage
 ```coffee
-collection = new Collection()
-	.append 'Luke Skywalker'
-	.append 'Han Solo'
-	.append 'Chewbacca'
-	.append 'Yoda'
-	.append 'R2D2'
-	.sort()
-	.get()
+user = new User 'Cary', 'Landholt'
+fullName = user.getFullName() # Cary Landholt
 ```
 
 
@@ -544,13 +439,11 @@ class Twitterfy extends Filter
 
 equivalent to
 ```javascript
-angular.module('app').filter('twitterfy', [
-	function Twitterfy() {
-		return function (username) {
-			return '@' + username;
-		};
-	}
-]);
+angular.module('app').filter('twitterfy', [function Twitterfy () {
+	return function (username) {
+		return '@' + username;
+	};
+}]);
 ```
 
 
@@ -572,25 +465,23 @@ class Greetings extends Provider
 
 equivalent to
 ```javascript
-angular.module('app').provider('greetingsProvider', ['$log',
-	function Greetings($log) {
-		this.name = 'default';
+angular.module('app').provider('greetingsProvider', ['$log', function Greetings ($log) {
+	this.name = 'default';
 
-		this.$get = function () {
-			var name = this.name;
+	this.$get = function () {
+		var name = this.name;
 
-			return {
-				sayHello: function () {
-					return $log.info(name);
-				}
-			};
+		return {
+			sayHello: function () {
+				return $log.info(name);
+			}
 		};
+	};
 
-		this.setName = function (name) {
-			return this.name = name;
-		};
-	}
-]);
+	this.setName = function (name) {
+		return this.name = name;
+	};
+}]);
 ```
 
 
@@ -603,11 +494,9 @@ class ViewsBackend extends Run
 
 equivalent to
 ```javascript
-angular.module('app').run(['$httpBackend',
-	function ViewsBackend($httpBackend) {
-		$httpBackend.whenGET(/^.*\.(html|htm)$/).passThrough();
-	}
-]);
+angular.module('app').run(['$httpBackend', function ViewsBackend ($httpBackend) {
+	$httpBackend.whenGET(/^.*\.(html|htm)$/).passThrough();
+}]);
 ```
 
 
@@ -622,13 +511,11 @@ class Greeting extends Service
 equivalent to
 
 ```javascript
-angular.module('app').service('greetingService', ['$log',
-	function Greeting($log) {
-		this.sayHello = function (name) {
-			return $log.info(name);
-		};
-	}
-]);
+angular.module('app').service('greetingService', ['$log', function Greeting ($log) {
+	this.sayHello = function (name) {
+		return $log.info(name);
+	};
+}]);
 ```
 
 
@@ -689,6 +576,10 @@ Type: `String`
 Default: `'app'`  
 
 The name of the AngularJS app
+```javascript
+// for example
+angular.module('app')
+```
 
 
 ##### options.prefix
@@ -698,7 +589,7 @@ Default: `''`
 To avoid potential collisions, the moduleType prefix may be set (ex: `options.prefix = 'Ng'`)
 ```coffee
 class Home extends Ng.Controller
-	@constructor: ($log) ->
+	constructor: ($log) ->
 		$log.info 'homeController instantiated'
 ```
 
