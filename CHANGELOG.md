@@ -1,3 +1,11 @@
+### 3.0.1 (2014-07-02)
+
+
+#### Bug Fixes
+
+* **package.json:** ensure semver compliance ([31166288](https://github.com/CaryLandholt/ng-classify/commit/311662889922f08882dada8090eea020ab39261a))
+
+
 ## 3.0.0 (2014-06-18)
 
 
