@@ -1,3 +1,24 @@
+## 3.1.0 (2014-07-04)
+
+
+#### Features
+
+* **moduleChaining:** chain multiple module declarations ([0e9d4c5e](https://github.com/CaryLandholt/ng-classify/commit/0e9d4c5ea6deb2c4feb5b3e19cd5885d6fbff2a5))
+
+Before:
+```coffee
+angular.module('app').controller 'homeController', [Home]
+angular.module('app').service 'aboutService', [About]
+```
+
+After:
+```coffee
+angular.module('app')
+.controller 'homeController', [Home]
+.service 'aboutService', [About]
+```
+
+
 ### 3.0.1 (2014-07-02)
 
 
