@@ -10,6 +10,16 @@ module.exports = (content, options) ->
 	modTypes     = moduleTypes opts.prefix
 	appName      = opts.appName
 	details      = classDetails content, modTypes
+
+	# separate App moduleType from others
+	appClassDetails    = (detail for detail in details when detail.moduleType is 'App')
+	nonAppClassDetails = (detail for detail in details when detail.moduleType isnt 'App')
+
+	# ensure App moduleType is first
+	details = []
+		.concat appClassDetails
+		.concat nonAppClassDetails
+
 	contentLines = content.split '\n'
 
 	# take the following class line
@@ -38,8 +48,17 @@ module.exports = (content, options) ->
 		detail.appName = appName
 		modDetails     = moduleDetails detail, opts
 		contentLines   = getTrimmedContent contentLines, detail.position
-		
+
 		modDetails
+
+	hasModules        = modules.length isnt 0
+	hasAppClassDetals = appClassDetails.length isnt 0
+
+	# prepend App getter
+	if hasModules and not hasAppClassDetals
+		app = "angular.module('#{appName}')"
+
+		modules.unshift app
 
 	ngClassified  = contentLines.join '\n'
 	ngClassified += '\n\n' if modules.length isnt 0
