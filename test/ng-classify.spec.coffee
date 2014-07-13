@@ -31,7 +31,7 @@ describe 'ng-classify', ->
 							# flag will be set to true if cancelled).
 						}
 
-		angular.module('app')
+		angular.module 'app'
 		.animation '.my-crazy-fader', [MyCrazyFader]
 		'''
 
@@ -124,7 +124,7 @@ describe 'ng-classify', ->
 				.otherwise
 					redirectTo: '/home'
 
-		angular.module('app')
+		angular.module 'app'
 		.config ['$routeProvider', Routes]
 		'''
 
@@ -152,7 +152,7 @@ describe 'ng-classify', ->
 					'404': 'Not Found'
 				}
 
-		angular.module('app')
+		angular.module 'app'
 		.constant 'HTTP_STATUS_CODES', HttpStatusCodes()
 		'''
 
@@ -174,7 +174,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['userService', Home]
 		'''
 
@@ -202,7 +202,7 @@ describe 'ng-classify', ->
 					templateUrl: 'dialog.html'
 				}
 
-		angular.module('app')
+		angular.module 'app'
 		.directive 'dialog', [Dialog]
 		'''
 
@@ -318,7 +318,7 @@ describe 'ng-classify', ->
 
 							@
 
-		angular.module('app')
+		angular.module 'app'
 		.factory 'Collection', ['$log', Collection]
 		'''
 
@@ -340,7 +340,7 @@ describe 'ng-classify', ->
 				return (username) ->
 					"@#{username}"
 
-		angular.module('app')
+		angular.module 'app'
 		.filter 'twitterfy', [Twitterfy]
 		'''
 
@@ -378,7 +378,7 @@ describe 'ng-classify', ->
 				@setName = (name) ->
 					@name = name
 
-		angular.module('app')
+		angular.module 'app'
 		.provider 'greetingsProvider', ['$log', Greetings]
 		'''
 
@@ -398,7 +398,7 @@ describe 'ng-classify', ->
 			constructor: ($httpBackend) ->
 					$httpBackend.whenGET(/^.*\.(html|htm)$/).passThrough()
 
-		angular.module('app')
+		angular.module 'app'
 		.run ['$httpBackend', ViewsBackend]
 		'''
 
@@ -420,7 +420,7 @@ describe 'ng-classify', ->
 				@sayHello = (name) ->
 					$log.info name
 
-		angular.module('app')
+		angular.module 'app'
 		.service 'greetingService', ['$log', Greeting]
 		'''
 
@@ -458,7 +458,7 @@ describe 'ng-classify', ->
 					}
 				]
 
-		angular.module('app')
+		angular.module 'app'
 		.value 'people', People()
 		'''
 
@@ -480,7 +480,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['userService', Home]
 		'''
 
@@ -490,7 +490,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['@userService', Home]
 		'''
 
@@ -523,7 +523,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['userService', Home]
 		.controller 'anotherHomeController', ['anotherService', AnotherHome]
 		'''
@@ -552,7 +552,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['userService', Home]
 		'''
 
@@ -580,7 +580,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['userService', Home]
 		'''
 
@@ -604,7 +604,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['userService', Home]
 		'''
 
@@ -662,7 +662,7 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username + square(2)
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['userService', Home]
 		.controller 'anotherHomeController', ['anotherService', AnotherHome]
 		'''
@@ -727,7 +727,7 @@ describe 'ng-classify', ->
 			constructor: ($log) ->
 				$log.info 'controller with prefix'
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['$log', Home]
 		'''
 
@@ -747,7 +747,7 @@ describe 'ng-classify', ->
 			constructor: ($log) ->
 				$log.info 'controller with prefix'
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', ['$log', Home]
 		'''
 
@@ -765,7 +765,7 @@ describe 'ng-classify', ->
 		class Home
 			constructor: do ->
 
-		angular.module('app')
+		angular.module 'app'
 		.controller 'homeController', [Home]
 		'''
 

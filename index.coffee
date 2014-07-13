@@ -51,12 +51,12 @@ module.exports = (content, options) ->
 
 		modDetails
 
-	hasModules        = modules.length isnt 0
-	hasAppClassDetals = appClassDetails.length isnt 0
+	hasModules         = modules.length isnt 0
+	hasAppClassDetails = appClassDetails.length isnt 0
 
 	# prepend App getter
-	if hasModules and not hasAppClassDetals
-		app = "angular.module('#{appName}')"
+	if hasModules and not hasAppClassDetails
+		app = "angular.module '#{appName}'"
 
 		modules.unshift app
 
