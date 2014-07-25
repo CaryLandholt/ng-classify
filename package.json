@@ -30,7 +30,7 @@
 		"conventional-changelog": "0.0.11",
 		"gulp": "^3.8.0",
 		"gulp-jasmine": "0.2.0",
-		"gulp-util": "^2.2.17"
+		"gulp-util": "^3.0.0"
 	},
 	"scripts": {
 		"test": "gulp test"
