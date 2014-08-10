@@ -224,3 +224,27 @@ describe 'classDetails', ->
 		]
 
 		expect(result).toEqual(expectation)
+
+	describe 'appName class definition', ->
+		it 'should collect class details with appName', ->
+			input = '''
+			class Home extends Controller('common')
+				console.log 'no constructor'
+			'''
+
+			result = classDetails input, moduleTypes('')
+
+			expectation = [
+				className: 'Home'
+				moduleType: 'Controller'
+				appName: 'common'
+				parameters: [
+					'Home'
+				]
+				position:
+					row: 0
+					start: 9
+					end: 38
+			]
+
+			expect(result).toEqual(expectation)

@@ -1,105 +1,6 @@
 ngClassify = require '../index'
 
 describe 'ng-classify', ->
-	it 'SHOULD1', ->
-		input = '''
-		class Home extends Controller('common.a')
-			constructor: ->
-
-		class Home2 extends Controller 'common.a'
-			constructor: ->
-
-		class About extends Controller
-			constructor: ->
-
-		class Admin extends Controller
-			constructor: ->
-		'''
-
-		result = ngClassify input
-
-		expectation = '''
-		class Home
-			constructor: ->
-
-		class Home2
-			constructor: ->
-
-		class About
-			constructor: ->
-
-		class Admin
-			constructor: ->
-
-		angular.module 'common.a'
-		.controller 'homeController', [Home]
-		.controller 'home2Controller', [Home2]
-
-		angular.module 'app'
-		.controller 'aboutController', [About]
-		.controller 'adminController', [Admin]
-		'''
-
-		expect(result).toEqual(expectation)
-
-	it 'SHOULD2', ->
-		input = '''
-		class Home extends Controller('common.a')
-			constructor: ->
-
-		class About extends Controller('common.b')
-			constructor: ->
-
-		class CommonB extends App('common.b')
-			constructor: ->
-
-		class Admin extends Controller('common.b')
-			constructor: ->
-		'''
-
-		result = ngClassify input
-
-		expectation = '''
-		class Home
-			constructor: ->
-
-		class About
-			constructor: ->
-
-		class CommonB
-			constructor: ->
-
-		class Admin
-			constructor: ->
-
-		angular.module 'common.a'
-		.controller 'homeController', [Home]
-
-		angular.module 'common.b', CommonB()
-		.controller 'aboutController', [About]
-		.controller 'adminController', [Admin]
-		'''
-
-		expect(result).toEqual(expectation)
-
-	it 'SHOULD3', ->
-		input = '''
-		class Home extends Controller('buildbot.common')
-			constructor: ->
-		'''
-
-		result = ngClassify input
-
-		expectation = '''
-		class Home
-			constructor: ->
-
-		angular.module 'buildbot.common'
-		.controller 'homeController', [Home]
-		'''
-
-		expect(result).toEqual(expectation)
-
 	it 'should compile an Animation', ->
 		input = '''
 		class MyCrazyFader extends Animation
@@ -869,3 +770,155 @@ describe 'ng-classify', ->
 		'''
 
 		expect(result).toEqual(expectation)
+
+	describe 'appName class definition', ->
+		it 'should use provided appName', ->
+			input = '''
+			class Home extends Controller('common')
+				constructor: ->
+			'''
+
+			result = ngClassify input
+
+			expectation = '''
+			class Home
+				constructor: ->
+
+			angular.module 'common'
+			.controller 'homeController', [Home]
+			'''
+
+			expect(result).toEqual(expectation)
+
+		it 'should group modules by appName', ->
+			input = '''
+			class Home extends Controller('common.a')
+				constructor: ->
+
+			class About extends Controller('common.a')
+				constructor: ->
+			'''
+
+			result = ngClassify input
+
+			expectation = '''
+			class Home
+				constructor: ->
+
+			class About
+				constructor: ->
+
+			angular.module 'common.a'
+			.controller 'homeController', [Home]
+			.controller 'aboutController', [About]
+			'''
+
+			expect(result).toEqual(expectation)
+
+		it 'should fallback to default appName when not provided', ->
+			input = '''
+			class Home extends Controller('common.a')
+				constructor: ->
+
+			class About extends Controller('common.a')
+				constructor: ->
+
+			class Admin extends Controller
+				constructor: ->
+			'''
+
+			result = ngClassify input
+
+			expectation = '''
+			class Home
+				constructor: ->
+
+			class About
+				constructor: ->
+
+			class Admin
+				constructor: ->
+
+			angular.module 'common.a'
+			.controller 'homeController', [Home]
+			.controller 'aboutController', [About]
+
+			angular.module 'app'
+			.controller 'adminController', [Admin]
+			'''
+
+			expect(result).toEqual(expectation)
+
+		it 'should use options.appName when appName is not provided', ->
+			input = '''
+			class Home extends Controller('common.a')
+				constructor: ->
+
+			class About extends Controller('common.a')
+				constructor: ->
+
+			class Admin extends Controller
+				constructor: ->
+			'''
+
+			result = ngClassify input, appName: 'myAppName'
+
+			expectation = '''
+			class Home
+				constructor: ->
+
+			class About
+				constructor: ->
+
+			class Admin
+				constructor: ->
+
+			angular.module 'common.a'
+			.controller 'homeController', [Home]
+			.controller 'aboutController', [About]
+
+			angular.module 'myAppName'
+			.controller 'adminController', [Admin]
+			'''
+
+			expect(result).toEqual(expectation)
+
+		it 'should use setter when moduleType is \'App\'', ->
+			input = '''
+			class Home extends Controller('common.a')
+				constructor: ->
+
+			class About extends Controller('common.a')
+				constructor: ->
+
+			class CommonA extends App('common.a')
+				constructor: ->
+
+			class Admin extends Controller
+				constructor: ->
+			'''
+
+			result = ngClassify input, appName: 'myAppName'
+
+			expectation = '''
+			class Home
+				constructor: ->
+
+			class About
+				constructor: ->
+
+			class CommonA
+				constructor: ->
+
+			class Admin
+				constructor: ->
+
+			angular.module 'common.a', CommonA()
+			.controller 'homeController', [Home]
+			.controller 'aboutController', [About]
+
+			angular.module 'myAppName'
+			.controller 'adminController', [Admin]
+			'''
+
+			expect(result).toEqual(expectation)
