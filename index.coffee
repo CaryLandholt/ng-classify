@@ -1,4 +1,5 @@
 classDetails  = require './lib/classDetails'
+extend        = require 'node.extend'
 formatOptions = require './lib/formatOptions'
 moduleDetails = require './lib/moduleDetails'
 moduleOptions = require './lib/moduleOptions'
@@ -8,18 +9,8 @@ module.exports = (content, options) ->
 	formatOpts   = formatOptions options
 	opts         = moduleOptions formatOpts, options
 	modTypes     = moduleTypes opts.prefix
-	appName      = opts.appName
+	appName      = if not opts.appName then 'app' else opts.appName
 	details      = classDetails content, modTypes
-
-	# separate App moduleType from others
-	appClassDetails    = (detail for detail in details when detail.moduleType is 'App')
-	nonAppClassDetails = (detail for detail in details when detail.moduleType isnt 'App')
-
-	# ensure App moduleType is first
-	details = []
-		.concat appClassDetails
-		.concat nonAppClassDetails
-
 	contentLines = content.split '\n'
 
 	# take the following class line
@@ -43,23 +34,40 @@ module.exports = (content, options) ->
 
 		lines
 
-	# add appName to moduleDetails
-	modules = for detail in details
-		detail.appName = appName
-		modDetails     = moduleDetails detail, opts
-		contentLines   = getTrimmedContent contentLines, detail.position
+	apps = {}
 
-		modDetails
+	details.forEach (detail) ->
+		moduleAppName = if not detail.appName then appName else detail.appName
+		modDetails    = moduleDetails extend(true, detail, {appName: moduleAppName}), opts
+		contentLines  = getTrimmedContent contentLines, detail.position
 
-	hasModules         = modules.length isnt 0
-	hasAppClassDetails = appClassDetails.length isnt 0
+		if not apps[moduleAppName]
+			apps[moduleAppName] = {}
 
-	# prepend App getter
-	if hasModules and not hasAppClassDetails
-		app = "angular.module '#{appName}'"
+		if detail.moduleType is 'App'
+			if not apps[moduleAppName].appTypes
+				apps[moduleAppName].appTypes = []
 
-		modules.unshift app
+			apps[moduleAppName].appTypes.push modDetails
+		else
+			if not apps[moduleAppName].nonAppTypes
+				apps[moduleAppName].nonAppTypes = []
+
+			apps[moduleAppName].nonAppTypes.push modDetails
+
+	lines = []
+
+	for app, modDetails of apps
+		if modDetails.appTypes
+			modDetails.appTypes.forEach (appType) ->
+				lines.push appType
+		else
+			lines.push "angular.module '#{app}'"
+
+		if modDetails.nonAppTypes and modDetails.nonAppTypes.length > 0
+			modDetails.nonAppTypes.forEach (nonAppType) ->
+				lines.push nonAppType
 
 	ngClassified  = contentLines.join '\n'
-	ngClassified += '\n\n' if modules.length isnt 0
-	ngClassified += modules.join '\n'
+	ngClassified += '\n\n' if lines.length
+	ngClassified += lines.join '\n'

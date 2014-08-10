@@ -13,6 +13,7 @@ describe 'classDetails', ->
 		expectation = [
 			className: 'Home'
 			moduleType: 'Controller'
+			appName: null
 			parameters: [
 				'Home'
 			]
@@ -36,6 +37,7 @@ describe 'classDetails', ->
 		expectation = [
 			className: 'Home'
 			moduleType: 'Controller'
+			appName: null
 			parameters: [
 				'Home'
 			]
@@ -59,6 +61,7 @@ describe 'classDetails', ->
 		expectation = [
 			className: 'Home'
 			moduleType: 'Controller'
+			appName: null
 			parameters: [
 				"'$log'"
 				'Home'
@@ -83,6 +86,7 @@ describe 'classDetails', ->
 		expectation = [
 			className: 'Home'
 			moduleType: 'Controller'
+			appName: null
 			parameters: [
 				"'$log'"
 				"'$httpBackend'"
@@ -108,6 +112,7 @@ describe 'classDetails', ->
 		expectation = [
 			className: 'Home'
 			moduleType: 'Controller'
+			appName: null
 			parameters: [
 				"'$log'"
 				"'$httpBackend'"
@@ -132,6 +137,7 @@ describe 'classDetails', ->
 		expectation = [
 			className: 'Home'
 			moduleType: 'Ng.Controller'
+			appName: null
 			parameters: [
 				'Home'
 			]
@@ -150,10 +156,11 @@ describe 'classDetails', ->
 		'''
 
 		result = classDetails input, moduleTypes('Ng.My.')
-
+	
 		expectation = [
 			className: 'Home'
 			moduleType: 'Ng.My.Controller'
+			appName: null
 			parameters: [
 				'Home'
 			]
@@ -170,12 +177,13 @@ describe 'classDetails', ->
 		class Home extends Ng.My.Controller
 			console.log 'no constructor'
 		'''
-
+	
 		result = classDetails input, moduleTypes('Ng.My.')
-
+	
 		expectation = [
 			className: 'Home'
 			moduleType: 'Ng.My.Controller'
+			appName: null
 			parameters: [
 				'Home'
 			]
@@ -193,7 +201,7 @@ describe 'classDetails', ->
 		expect(result[0].moduleType).toEqual('Ng.My.Controller')
 		expect(result[0].moduleType).not.toEqual('Ng.My..Controller')
 		expect(result[0].moduleType).not.toEqual('Ng.MyController')
-		
+
 	it 'should collect class details with a do in the constructor', ->
 		input = '''
 		class Home extends Controller
@@ -205,6 +213,7 @@ describe 'classDetails', ->
 		expectation = [
 			className: 'Home'
 			moduleType: 'Controller'
+			appName: null
 			parameters: [
 				'Home'
 			]

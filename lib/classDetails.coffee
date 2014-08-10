@@ -8,6 +8,7 @@ module.exports = (content, moduleTypes) ->
 		moduleType in moduleTypes
 
 	processNode = (node) ->
+		appName = null
 		node    = node.expression if node.expression
 		body    = node.body
 		isClass = node.variable and node.parent and body?.classBody
@@ -25,9 +26,20 @@ module.exports = (content, moduleTypes) ->
 
 			return if not isExtends
 
-			base         = parent.base
-			position.end = base.locationData.last_column
-			moduleType   = base.value
+			base = parent.base
+
+			# handle extends ModuleType('appName')
+			hasAppName = not base
+
+			if hasAppName
+				moduleType   = parent.variable.base.value
+				position.end = parent.locationData.last_column
+				parent       = parent.args[0]
+				base         = parent.base
+				appName      = eval base.value
+			else
+				position.end = base.locationData.last_column
+				moduleType   = base.value
 
 			# handle namespaces (e.g. Ng.Controller)
 			properties   = parent.properties
@@ -42,7 +54,7 @@ module.exports = (content, moduleTypes) ->
 
 			return if not isAngular
 
-			classDetails.push {className, moduleType, parameters: [], position}
+			classDetails.push {className, moduleType, appName, parameters: [], position}
 			processNodes body.expressions
 
 		base          = node.base
