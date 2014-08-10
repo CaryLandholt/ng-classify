@@ -88,6 +88,7 @@ $ npm install grunt-ng-classify
 	- [Run](#run)
 	- [Service](#service)
 	- [Value](#value)
+* [Multiple Apps](#multiple-apps)
 * [API](#api)
 * [Contributing](#contributing)
 * [Changelog](#changelog)
@@ -549,6 +550,28 @@ angular.module('app').value('people',
 		}
 	]
 );
+```
+
+
+## Multiple Apps
+Although using multiple apps in an AngularJS application is unnecessary, some may
+still wish to do so.
+
+Simply provide the app name as a parameter to the module type.
+
+In the example below, a Controller is created within the 'common' app.
+```coffee
+class Home extends Controller('common')
+	constructor: ($log) ->
+		$log.info 'homeController instantiated'
+```
+
+equivalent to
+
+```javascript
+angular.module('common').controller('homeController', ['$log', function ($log) {
+	$log.info('homeController instantiated');
+})];
 ```
 
 
