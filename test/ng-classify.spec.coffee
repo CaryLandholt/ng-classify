@@ -3,7 +3,10 @@ ngClassify = require '../index'
 describe 'ng-classify', ->
 	it 'SHOULD1', ->
 		input = '''
-		class Home extends Controller('buildbot.common')
+		class Home extends Controller('common.a')
+			constructor: ->
+
+		class Home2 extends Controller 'common.a'
 			constructor: ->
 
 		class About extends Controller
@@ -19,14 +22,19 @@ describe 'ng-classify', ->
 		class Home
 			constructor: ->
 
+		class Home2
+			constructor: ->
+
 		class About
 			constructor: ->
 
 		class Admin
 			constructor: ->
 
-		angular.module 'buildbot.common'
+		angular.module 'common.a'
 		.controller 'homeController', [Home]
+		.controller 'home2Controller', [Home2]
+
 		angular.module 'app'
 		.controller 'aboutController', [About]
 		.controller 'adminController', [Admin]
@@ -42,7 +50,10 @@ describe 'ng-classify', ->
 		class About extends Controller('common.b')
 			constructor: ->
 
-		class Admin extends Controller
+		class CommonB extends App('common.b')
+			constructor: ->
+
+		class Admin extends Controller('common.b')
 			constructor: ->
 		'''
 
@@ -55,14 +66,17 @@ describe 'ng-classify', ->
 		class About
 			constructor: ->
 
+		class CommonB
+			constructor: ->
+
 		class Admin
 			constructor: ->
 
 		angular.module 'common.a'
 		.controller 'homeController', [Home]
-		angular.module 'common.a'
+
+		angular.module 'common.b', CommonB()
 		.controller 'aboutController', [About]
-		angular.module 'app'
 		.controller 'adminController', [Admin]
 		'''
 

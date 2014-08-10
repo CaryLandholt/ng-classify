@@ -58,6 +58,9 @@ module.exports = (content, options) ->
 	lines = []
 
 	for app, modDetails of apps
+		# add newline between angular.module statements
+		lines.push '' if lines.length isnt 0
+
 		if modDetails.appTypes
 			modDetails.appTypes.forEach (appType) ->
 				lines.push appType
