@@ -1,3 +1,18 @@
+## 4.0.0 (2014-08-10)
+
+
+#### Features
+
+* **multipleApps:**
+  * add newline between app statements ([9b01b5e6](https://github.com/CaryLandholt/ng-classify/commit/9b01b5e61d98d7cb181f9abb1013bf2a719fac2f))
+  * add support for multiple apps ([1e719d42](https://github.com/CaryLandholt/ng-classify/commit/1e719d4200c19c649130eccf324bca86a5a8fc88))
+  * add support for multiple apps ([2f8f6c8f](https://github.com/CaryLandholt/ng-classify/commit/2f8f6c8ff7bf53db39b7d32613c027dab1acabc9))
+
+```coffee
+class Home extends Controller('my.app.name')
+```
+
+
 ## 3.1.0 (2014-07-04)
 
 
