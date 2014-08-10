@@ -1,7 +1,7 @@
 ngClassify = require '../index'
 
 describe 'ng-classify', ->
-	it 'SHOULD', ->
+	it 'SHOULD1', ->
 		input = '''
 		class Home extends Controller('buildbot.common')
 			constructor: ->
@@ -34,7 +34,41 @@ describe 'ng-classify', ->
 
 		expect(result).toEqual(expectation)
 
-	it 'SHOULD', ->
+	it 'SHOULD2', ->
+		input = '''
+		class Home extends Controller('common.a')
+			constructor: ->
+
+		class About extends Controller('common.b')
+			constructor: ->
+
+		class Admin extends Controller
+			constructor: ->
+		'''
+
+		result = ngClassify input
+
+		expectation = '''
+		class Home
+			constructor: ->
+
+		class About
+			constructor: ->
+
+		class Admin
+			constructor: ->
+
+		angular.module 'common.a'
+		.controller 'homeController', [Home]
+		angular.module 'common.a'
+		.controller 'aboutController', [About]
+		angular.module 'app'
+		.controller 'adminController', [Admin]
+		'''
+
+		expect(result).toEqual(expectation)
+
+	it 'SHOULD3', ->
 		input = '''
 		class Home extends Controller('buildbot.common')
 			constructor: ->
@@ -51,7 +85,7 @@ describe 'ng-classify', ->
 		'''
 
 		expect(result).toEqual(expectation)
-	
+
 	it 'should compile an Animation', ->
 		input = '''
 		class MyCrazyFader extends Animation
