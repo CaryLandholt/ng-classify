@@ -65,7 +65,7 @@ module.exports = (content, options) ->
 			modDetails.appTypes.forEach (appType) ->
 				lines.push appType
 		else
-			lines.push "angular.module '#{app}'"
+			lines.push "angular.module('#{app}')"
 
 		if modDetails.nonAppTypes and modDetails.nonAppTypes.length > 0
 			modDetails.nonAppTypes.forEach (nonAppType) ->

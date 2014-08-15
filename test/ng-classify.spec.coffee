@@ -31,8 +31,8 @@ describe 'ng-classify', ->
 							# flag will be set to true if cancelled).
 						}
 
-		angular.module 'app'
-		.animation '.my-crazy-fader', [MyCrazyFader]
+		angular.module('app')
+		.animation('.my-crazy-fader', [MyCrazyFader])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -57,7 +57,7 @@ describe 'ng-classify', ->
 					'ngRoute'
 				]
 
-		angular.module 'app', App()
+		angular.module('app', App())
 		'''
 
 		expect(result).toEqual(expectation)
@@ -88,8 +88,8 @@ describe 'ng-classify', ->
 					'ngRoute'
 				]
 
-		angular.module 'app', App()
-		.controller 'homeController', [Home]
+		angular.module('app', App())
+		.controller('homeController', [Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -124,8 +124,8 @@ describe 'ng-classify', ->
 				.otherwise
 					redirectTo: '/home'
 
-		angular.module 'app'
-		.config ['$routeProvider', Routes]
+		angular.module('app')
+		.config(['$routeProvider', Routes])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -152,8 +152,8 @@ describe 'ng-classify', ->
 					'404': 'Not Found'
 				}
 
-		angular.module 'app'
-		.constant 'HTTP_STATUS_CODES', HttpStatusCodes()
+		angular.module('app')
+		.constant('HTTP_STATUS_CODES', HttpStatusCodes())
 		'''
 
 		expect(result).toEqual(expectation)
@@ -174,8 +174,8 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module 'app'
-		.controller 'homeController', ['userService', Home]
+		angular.module('app')
+		.controller('homeController', ['userService', Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -202,8 +202,8 @@ describe 'ng-classify', ->
 					templateUrl: 'dialog.html'
 				}
 
-		angular.module 'app'
-		.directive 'dialog', [Dialog]
+		angular.module('app')
+		.directive('dialog', [Dialog])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -318,8 +318,8 @@ describe 'ng-classify', ->
 
 							@
 
-		angular.module 'app'
-		.factory 'Collection', ['$log', Collection]
+		angular.module('app')
+		.factory('Collection', ['$log', Collection])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -340,8 +340,8 @@ describe 'ng-classify', ->
 				return (username) ->
 					"@#{username}"
 
-		angular.module 'app'
-		.filter 'twitterfy', [Twitterfy]
+		angular.module('app')
+		.filter('twitterfy', [Twitterfy])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -378,8 +378,8 @@ describe 'ng-classify', ->
 				@setName = (name) ->
 					@name = name
 
-		angular.module 'app'
-		.provider 'greetingsProvider', ['$log', Greetings]
+		angular.module('app')
+		.provider('greetingsProvider', ['$log', Greetings])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -398,8 +398,8 @@ describe 'ng-classify', ->
 			constructor: ($httpBackend) ->
 					$httpBackend.whenGET(/^.*\.(html|htm)$/).passThrough()
 
-		angular.module 'app'
-		.run ['$httpBackend', ViewsBackend]
+		angular.module('app')
+		.run(['$httpBackend', ViewsBackend])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -420,8 +420,8 @@ describe 'ng-classify', ->
 				@sayHello = (name) ->
 					$log.info name
 
-		angular.module 'app'
-		.service 'greetingService', ['$log', Greeting]
+		angular.module('app')
+		.service('greetingService', ['$log', Greeting])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -458,8 +458,8 @@ describe 'ng-classify', ->
 					}
 				]
 
-		angular.module 'app'
-		.value 'people', People()
+		angular.module('app')
+		.value('people', People())
 		'''
 
 		expect(result).toEqual(expectation)
@@ -480,8 +480,8 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module 'app'
-		.controller 'homeController', ['userService', Home]
+		angular.module('app')
+		.controller('homeController', ['userService', Home])
 		'''
 
 		notExpectation = '''
@@ -490,8 +490,8 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module 'app'
-		.controller 'homeController', ['@userService', Home]
+		angular.module('app')
+		.controller('homeController', ['@userService', Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -523,9 +523,9 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module 'app'
-		.controller 'homeController', ['userService', Home]
-		.controller 'anotherHomeController', ['anotherService', AnotherHome]
+		angular.module('app')
+		.controller('homeController', ['userService', Home])
+		.controller('anotherHomeController', ['anotherService', AnotherHome])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -552,8 +552,8 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module 'app'
-		.controller 'homeController', ['userService', Home]
+		angular.module('app')
+		.controller('homeController', ['userService', Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -580,8 +580,8 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module 'app'
-		.controller 'homeController', ['userService', Home]
+		angular.module('app')
+		.controller('homeController', ['userService', Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -604,8 +604,8 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username
 
-		angular.module 'app'
-		.controller 'homeController', ['userService', Home]
+		angular.module('app')
+		.controller('homeController', ['userService', Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -662,9 +662,9 @@ describe 'ng-classify', ->
 				@save = (username) ->
 					userService.addUser username + square(2)
 
-		angular.module 'app'
-		.controller 'homeController', ['userService', Home]
-		.controller 'anotherHomeController', ['anotherService', AnotherHome]
+		angular.module('app')
+		.controller('homeController', ['userService', Home])
+		.controller('anotherHomeController', ['anotherService', AnotherHome])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -727,8 +727,8 @@ describe 'ng-classify', ->
 			constructor: ($log) ->
 				$log.info 'controller with prefix'
 
-		angular.module 'app'
-		.controller 'homeController', ['$log', Home]
+		angular.module('app')
+		.controller('homeController', ['$log', Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -747,8 +747,8 @@ describe 'ng-classify', ->
 			constructor: ($log) ->
 				$log.info 'controller with prefix'
 
-		angular.module 'app'
-		.controller 'homeController', ['$log', Home]
+		angular.module('app')
+		.controller('homeController', ['$log', Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -765,8 +765,8 @@ describe 'ng-classify', ->
 		class Home
 			constructor: do ->
 
-		angular.module 'app'
-		.controller 'homeController', [Home]
+		angular.module('app')
+		.controller('homeController', [Home])
 		'''
 
 		expect(result).toEqual(expectation)
@@ -784,8 +784,8 @@ describe 'ng-classify', ->
 			class Home
 				constructor: ->
 
-			angular.module 'common'
-			.controller 'homeController', [Home]
+			angular.module('common')
+			.controller('homeController', [Home])
 			'''
 
 			expect(result).toEqual(expectation)
@@ -808,9 +808,9 @@ describe 'ng-classify', ->
 			class About
 				constructor: ->
 
-			angular.module 'common.a'
-			.controller 'homeController', [Home]
-			.controller 'aboutController', [About]
+			angular.module('common.a')
+			.controller('homeController', [Home])
+			.controller('aboutController', [About])
 			'''
 
 			expect(result).toEqual(expectation)
@@ -839,12 +839,12 @@ describe 'ng-classify', ->
 			class Admin
 				constructor: ->
 
-			angular.module 'common.a'
-			.controller 'homeController', [Home]
-			.controller 'aboutController', [About]
+			angular.module('common.a')
+			.controller('homeController', [Home])
+			.controller('aboutController', [About])
 
-			angular.module 'app'
-			.controller 'adminController', [Admin]
+			angular.module('app')
+			.controller('adminController', [Admin])
 			'''
 
 			expect(result).toEqual(expectation)
@@ -873,12 +873,12 @@ describe 'ng-classify', ->
 			class Admin
 				constructor: ->
 
-			angular.module 'common.a'
-			.controller 'homeController', [Home]
-			.controller 'aboutController', [About]
+			angular.module('common.a')
+			.controller('homeController', [Home])
+			.controller('aboutController', [About])
 
-			angular.module 'myAppName'
-			.controller 'adminController', [Admin]
+			angular.module('myAppName')
+			.controller('adminController', [Admin])
 			'''
 
 			expect(result).toEqual(expectation)
@@ -913,12 +913,12 @@ describe 'ng-classify', ->
 			class Admin
 				constructor: ->
 
-			angular.module 'common.a', CommonA()
-			.controller 'homeController', [Home]
-			.controller 'aboutController', [About]
+			angular.module('common.a', CommonA())
+			.controller('homeController', [Home])
+			.controller('aboutController', [About])
 
-			angular.module 'myAppName'
-			.controller 'adminController', [Admin]
+			angular.module('myAppName')
+			.controller('adminController', [Admin])
 			'''
 
 			expect(result).toEqual(expectation)
