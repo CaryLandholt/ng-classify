@@ -6,7 +6,8 @@
 > Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules  
 > Write less JavaScript.  Write less CoffeeScript.  Write less Angular.
 >
-> Watch the [screencast](https://www.youtube.com/watch?v=28gUTu9vnB4)
+> Watch the [screencast](https://www.youtube.com/watch?v=28gUTu9vnB4)  
+> [Demo](https://preview.c9.io/carylandholt/ng-classify-browserify/index.html)
 
 
 ## Install
