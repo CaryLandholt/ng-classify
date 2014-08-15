@@ -1,3 +1,26 @@
+### 4.0.1 (2014-08-14)
+
+
+#### Bug Fixes
+
+* **ambiguous-coffee-script:** ensure compilation is unambiguous ([a73cedc3](https://github.com/CaryLandholt/ng-classify/commit/a73cedc356afd7705ee8af9fa7c94149a68c41a7), closes [#20](https://github.com/CaryLandholt/ng-classify/issues/20))
+
+Although ng-classify produces valid CoffeeScript, other dependencies may use an older version of the CoffeeScript compiler that may not.  
+This isn't a bug fix as much as a friendly tweak.
+
+Before:
+```coffee
+angular.module 'app'
+.controller 'homeController', [Home]
+```
+
+After:
+```coffee
+angular.module('app')
+.controller('homeController', [Home])
+```
+
+
 ## 4.0.0 (2014-08-10)
 
 
