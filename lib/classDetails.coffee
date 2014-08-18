@@ -1,5 +1,6 @@
-coffeeScript = require 'coffee-script'
-nodes        = coffeeScript.nodes
+{allowUnsafeEval} = require 'loophole'
+coffeeScript      = require 'coffee-script'
+nodes             = coffeeScript.nodes
 
 module.exports = (content, moduleTypes) ->
 	classDetails = []
@@ -40,7 +41,7 @@ module.exports = (content, moduleTypes) ->
 
 				throw new Error 'appName must be a string' if typeof appName isnt 'string'
 
-				appName = eval appName
+				appName = allowUnsafeEval -> eval appName
 			else
 				position.end = base.locationData.last_column
 				moduleType   = base.value

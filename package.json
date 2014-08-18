@@ -24,6 +24,7 @@
 	},
 	"dependencies": {
 		"coffee-script": "^1.7.1",
+		"loophole": "^1.0.0",
 		"node.extend": "^1.0.10"
 	},
 	"devDependencies": {
