@@ -1,3 +1,11 @@
+### 4.0.2 (2014-08-17)
+
+
+#### Bug Fixes
+
+* **eval:** add allowUnsafeEval via loophole ([9d7ebd69](https://github.com/CaryLandholt/ng-classify/commit/9d7ebd69e25ba9b2e377b3b58927bcc0609ae1a0))
+
+
 ### 4.0.1 (2014-08-14)
 
 
