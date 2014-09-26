@@ -62,6 +62,12 @@ $ npm install grunt-ng-classify
 ```
 
 
+### Ruby Gem
+[ng_classify](https://rubygems.org/gems/ng_classify)
+```bash
+$ gem install ng_classify
+```
+
 ## Table of Contents
 * [Install](#install)
 * [Usage](#usage)
