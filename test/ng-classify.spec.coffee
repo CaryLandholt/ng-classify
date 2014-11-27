@@ -922,3 +922,25 @@ describe 'ng-classify', ->
 			'''
 
 			expect(result).toEqual(expectation)
+
+		it 'should compile with function wrapped classes', ->
+			input = '''
+			define ->
+				class Admin extends Controller('app.controllers')
+					constructor: ($scope, someService) ->
+						$scope.coolMethod = someService.coolMethod()
+			'''
+
+			result = ngClassify input
+
+			expectation = '''
+			define ->
+				class Admin
+					constructor: ($scope, someService) ->
+						$scope.coolMethod = someService.coolMethod()
+
+			angular.module('app.controllers')
+			.controller('adminController', ['$scope', 'someService', Admin])
+			'''
+
+			expect(result).toEqual(expectation)

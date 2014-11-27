@@ -62,6 +62,12 @@ module.exports = (content, moduleTypes) ->
 			classDetails.push {className, moduleType, appName, parameters: [], position}
 			processNodes body.expressions
 
+		# check to see if there exists a wrapper function (e.g. define, etc.)
+		hasWrapper = node?.args?[0]?.body?.expressions?
+
+		return if hasWrapper
+			processNodes node.args[0].body.expressions
+
 		base          = node.base
 		hasProperties = base?.properties
 
