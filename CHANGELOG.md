@@ -1,3 +1,16 @@
+### 4.0.3 (2014-12-04)
+
+
+#### Bug Fixes
+
+* **App:** prefix new keyword to App() constructor function ([d8e1c8a4](https://github.com/CaryLandholt/ng-classify/commit/d8e1c8a4b9a00c98ef7f7f0bd760a2cc30cd8dc3), closes [#27](https://github.com/CaryLandholt/ng-classify/issues/27))
+
+
+#### Features
+
+* **wrappedClasses:** add support for wrapped classes ([c9a062f0](https://github.com/CaryLandholt/ng-classify/commit/c9a062f0a85b35bec0f4a677ab1e831cf560488c))
+
+
 ### 4.0.2 (2014-08-17)
 
 
