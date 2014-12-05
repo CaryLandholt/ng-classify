@@ -57,7 +57,7 @@ describe 'ng-classify', ->
 					'ngRoute'
 				]
 
-		angular.module('app', App())
+		angular.module('app', new App())
 		'''
 
 		expect(result).toEqual(expectation)
@@ -88,7 +88,7 @@ describe 'ng-classify', ->
 					'ngRoute'
 				]
 
-		angular.module('app', App())
+		angular.module('app', new App())
 		.controller('homeController', [Home])
 		'''
 
@@ -913,7 +913,7 @@ describe 'ng-classify', ->
 			class Admin
 				constructor: ->
 
-			angular.module('common.a', CommonA())
+			angular.module('common.a', new CommonA())
 			.controller('homeController', [Home])
 			.controller('aboutController', [About])
 
