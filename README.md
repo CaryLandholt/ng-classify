@@ -63,10 +63,18 @@ $ npm install grunt-ng-classify
 
 
 ### Ruby Gem
-[ng_classify](https://rubygems.org/gems/ng_classify)
+[ng_classify](https://rubygems.org/gems/ng_classify) - maintained by [pencilcheck](https://github.com/pencilcheck/ng_classify)
 ```bash
 $ gem install ng_classify
 ```
+
+
+### Brunch
+[ng-classify-brunch](https://www.npmjs.com/package/ng-classify-brunch) - maintained by [andrejd](https://github.com/AndrejD/ng-classify-brunch)
+```bash
+$ npm install ng-classify-brunch
+```
+
 
 ## Table of Contents
 * [Install](#install)
