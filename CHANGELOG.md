@@ -1,3 +1,11 @@
+### 4.1.1 (2015-01-31)
+
+
+#### Bug Fixes
+
+* **dist:** add missing dist to npm ([f7a34214](https://github.com/CaryLandholt/ng-classify/commit/f7a3421491c11240c3abb59514f593bae33e51e3))
+
+
 ## 4.1.0 (2015-01-31)
 
 
