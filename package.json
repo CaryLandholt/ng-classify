@@ -28,9 +28,13 @@
 		"node.extend": "^1.0.10"
 	},
 	"devDependencies": {
+		"coffeeify": "^1.0.0",
 		"conventional-changelog": "0.0.11",
 		"gulp": "^3.8.0",
+		"gulp-browserify": "0.5.1",
+		"gulp-insert": "0.4.0",
 		"gulp-jasmine": "^1.0.0",
+		"gulp-rename": "^1.2.0",
 		"gulp-util": "^3.0.0"
 	},
 	"scripts": {
