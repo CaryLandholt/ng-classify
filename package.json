@@ -41,6 +41,7 @@
 		"test": "gulp test"
 	},
 	"files": [
+		"dist",
 		"lib",
 		"CHANGELOG.md",
 		"CONTRIBUTING.md",
