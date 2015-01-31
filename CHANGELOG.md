@@ -1,3 +1,11 @@
+## 4.1.0 (2015-01-31)
+
+
+#### Features
+
+* **commonjs:** add commonjs bundle ([fe0db907](https://github.com/CaryLandholt/ng-classify/commit/fe0db907692799b0cbc72a07565393e9b6484ff6))
+
+
 ### 4.0.3 (2014-12-04)
 
 
