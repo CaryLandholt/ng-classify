@@ -18,7 +18,7 @@ module.exports = (options) ->
 			format: 'camelCase'
 		provider:
 			format: 'camelCase'
-			suffix: 'Provider'
+			#suffix: 'Provider'
 		service:
 			format: 'camelCase'
 			suffix: 'Service'
