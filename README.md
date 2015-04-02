@@ -664,7 +664,7 @@ Default: `{format: 'camelCase'}`
 
 ##### options.provider
 Type: `Object`  
-Default: `{format: 'camelCase', suffix: 'Provider'}`  
+Default: `{format: 'camelCase'}`  
 
 
 ##### options.service
