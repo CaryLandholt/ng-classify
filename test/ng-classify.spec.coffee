@@ -379,7 +379,7 @@ describe 'ng-classify', ->
 					@name = name
 
 		angular.module('app')
-		.provider('greetingsProvider', ['$log', Greetings])
+		.provider('greetings', ['$log', Greetings])
 		'''
 
 		expect(result).toEqual(expectation)
