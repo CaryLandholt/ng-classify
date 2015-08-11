@@ -459,7 +459,7 @@ describe 'ng-classify', ->
 				]
 
 		angular.module('app')
-		.value('people', People())
+		.value('people', new People())
 		'''
 
 		expect(result).toEqual(expectation)

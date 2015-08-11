@@ -15,7 +15,7 @@ module.exports = (formatOptions, options) ->
 			provider: ".{{moduleType|lowerCase}}('#{formatOptions.provider.prefix}{{className|#{formatOptions.provider.format}}}#{formatOptions.provider.suffix}', [{{parameters}}])"
 			run: ".{{moduleType|lowerCase}}([{{parameters}}])"
 			service: ".{{moduleType|lowerCase}}('#{formatOptions.service.prefix}{{className|#{formatOptions.service.format}}}#{formatOptions.service.suffix}', [{{parameters}}])"
-			value: ".{{moduleType|lowerCase}}('#{formatOptions.value.prefix}{{className|#{formatOptions.value.format}}}#{formatOptions.value.suffix}', {{className}}())"
+			value: ".{{moduleType|lowerCase}}('#{formatOptions.value.prefix}{{className|#{formatOptions.value.format}}}#{formatOptions.value.suffix}', new {{className}}())"
 		prefix: ''
 
 	merged = extend true, moduleOptions, options
