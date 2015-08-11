@@ -29,11 +29,11 @@
 	},
 	"devDependencies": {
 		"coffeeify": "^1.0.0",
-		"conventional-changelog": "0.0.11",
+		"conventional-changelog": "0.3.0",
 		"gulp": "^3.8.0",
 		"gulp-browserify": "0.5.1",
-		"gulp-insert": "0.4.0",
-		"gulp-jasmine": "^1.0.0",
+		"gulp-insert": "0.5.0",
+		"gulp-jasmine": "^2.0.1",
 		"gulp-rename": "^1.2.0",
 		"gulp-util": "^3.0.0"
 	},

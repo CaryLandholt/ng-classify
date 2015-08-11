@@ -153,7 +153,7 @@ describe 'ng-classify', ->
 				}
 
 		angular.module('app')
-		.constant('HTTP_STATUS_CODES', HttpStatusCodes())
+		.constant('HTTP_STATUS_CODES', new HttpStatusCodes())
 		'''
 
 		expect(result).toEqual(expectation)
