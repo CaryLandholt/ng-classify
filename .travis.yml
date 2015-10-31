@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 0.10
+before_install:
+  - npm i npm -g
 notifications:
   email:
     on_success: always
