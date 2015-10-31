@@ -23,7 +23,6 @@
 		"node": ">=0.10.0"
 	},
 	"dependencies": {
-		"coffee-script": "^1.7.1",
 		"loophole": "^1.0.0",
 		"node.extend": "^1.0.10"
 	},
@@ -36,6 +35,9 @@
 		"gulp-jasmine": "^2.0.1",
 		"gulp-rename": "^1.2.0",
 		"gulp-util": "^3.0.0"
+	},
+	"peerDependencies": {
+		"coffee-script": "^1.7.1"
 	},
 	"scripts": {
 		"test": "gulp test"
