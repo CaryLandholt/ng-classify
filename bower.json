@@ -1,0 +1,13 @@
+{
+  "name": "ng-classify",
+  "authors": [
+    "@CaryLandholt"
+  ],
+  "description": "Convert CoffeeScript classes to AngularJS modules",
+  "main": "dist/ng-classify-commonjs.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CaryLandholt/ng-classify"
+}
