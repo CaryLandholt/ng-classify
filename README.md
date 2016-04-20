@@ -3,10 +3,10 @@
 [![Version][version-image]][version-url]
 [![Build Status][build-image]][build-url]
 [![Dependency Status][dependencies-image]][dependencies-url]
-> Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules  
+> Convert CoffeeScript classes to [AngularJS](http://angularjs.org/) modules
 > Write less JavaScript.  Write less CoffeeScript.  Write less Angular.
 >
-> Watch the [screencast](https://www.youtube.com/watch?v=28gUTu9vnB4)  
+> Watch the [screencast](https://www.youtube.com/watch?v=28gUTu9vnB4)
 > [Demo](https://preview.c9.io/carylandholt/ng-classify-browserify/index.html)
 
 
@@ -93,6 +93,7 @@ $ npm install ng-classify-brunch
 * [Module Types](#module-types)
 	- [App](#app)
 	- [Animation](#animation)
+	- [Component](#component)
 	- [Config](#config)
 	- [Constant](#constant)
 	- [Controller](#controller)
@@ -307,6 +308,22 @@ angular.module('app').animation('.my-crazy-fader', [function MyCrazyFader () {
 		}
 	};
 }]);
+```
+
+### component
+```coffee
+class Modal extends Component
+	constructor: ->
+		return {
+			template: '<h1>Component</h1>'
+		}
+```
+
+equivalent to
+```javascript
+angular.module('app').component('modal', return {
+	template: '<h1>Component</h1>'
+});
 ```
 
 
@@ -597,21 +614,21 @@ angular.module('common').controller('homeController', ['$log', function ($log) {
 
 
 #### content
-*Required*  
-Type: `String`  
-Default: `undefined`  
+*Required*
+Type: `String`
+Default: `undefined`
 
 The content that may contain CoffeeScript classes to convert to AngularJS modules
 
 
 #### options
-Type: `Object`  
-Default: `undefined`  
+Type: `Object`
+Default: `undefined`
 
 
 ##### options.appName
-Type: `String`  
-Default: `'app'`  
+Type: `String`
+Default: `'app'`
 
 The name of the AngularJS app
 ```javascript
@@ -621,8 +638,8 @@ angular.module('app')
 
 
 ##### options.prefix
-Type: `String`  
-Default: `''`  
+Type: `String`
+Default: `''`
 
 To avoid potential collisions, the moduleType prefix may be set (ex: `options.prefix = 'Ng'`)
 ```coffee
@@ -633,48 +650,51 @@ class Home extends Ng.Controller
 
 
 ##### options.animation
-Type: `Object`  
-Default: `{format: 'spinalCase', prefix: '.'}`  
+Type: `Object`
+Default: `{format: 'spinalCase', prefix: '.'}`
 
+##### options.component
+Type: `Object`
+Default: `{format: 'camelCase'}`
 
 ##### options.constant
-Type: `Object`  
-Default: `{format: 'screamingSnakeCase'}`  
+Type: `Object`
+Default: `{format: 'screamingSnakeCase'}`
 
 
 ##### options.controller
-Type: `Object`  
-Default: `{format: 'camelCase', suffix: 'Controller'}`  
+Type: `Object`
+Default: `{format: 'camelCase', suffix: 'Controller'}`
 
 
 ##### options.directive
-Type: `Object`  
-Default: `{format: 'camelCase'}`  
+Type: `Object`
+Default: `{format: 'camelCase'}`
 
 
 ##### options.factory
-Type: `Object`  
-Default: `{format: 'upperCamelCase'}`  
+Type: `Object`
+Default: `{format: 'upperCamelCase'}`
 
 
 ##### options.filter
-Type: `Object`  
-Default: `{format: 'camelCase'}`  
+Type: `Object`
+Default: `{format: 'camelCase'}`
 
 
 ##### options.provider
-Type: `Object`  
-Default: `{format: 'camelCase'}`  
+Type: `Object`
+Default: `{format: 'camelCase'}`
 
 
 ##### options.service
-Type: `Object`  
-Default: `{format: 'camelCase', suffix: 'Service'}`  
+Type: `Object`
+Default: `{format: 'camelCase', suffix: 'Service'}`
 
 
 ##### options.value
-Type: `Object`  
-Default: `{format: 'camelCase'}`  
+Type: `Object`
+Default: `{format: 'camelCase'}`
 
 
 ### Supported Formats
