@@ -29,9 +29,9 @@
   },
   "devDependencies": {
     "coffeeify": "^1.0.0",
-    "conventional-changelog": "^1.1.0",
     "gulp": "^3.8.0",
     "gulp-browserify": "0.5.1",
+    "gulp-conventional-changelog": "^1.1.0",
     "gulp-insert": "0.5.0",
     "gulp-jasmine": "^2.0.1",
     "gulp-rename": "^1.2.0",

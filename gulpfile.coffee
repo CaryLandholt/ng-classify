@@ -1,7 +1,7 @@
 CHANGELOG_FILE        = 'CHANGELOG.md'
 
 browserify            = require 'gulp-browserify'
-conventionalChangelog = require 'conventional-changelog'
+conventionalChangelog = require('gulp-conventional-changelog')
 fs                    = require 'fs'
 gulp                  = require 'gulp'
 gutil                 = require 'gulp-util'
@@ -28,15 +28,20 @@ gulp.task 'bundle', ->
 		.pipe insert.append '(1)'
 		.pipe gulp.dest './dist/'
 
-gulp.task 'changelog', ['bundle'],  ->
-	options =
-		repository : pkg.repository.url
-		version    : pkg.version
-		file       : CHANGELOG_FILE
-		log        : gutil.log
+gulp.task 'changelog', ['bundle'], ->
+	gulp.src('CHANGELOG.md')
+		.pipe(conventionalChangelog({preset: 'angular', release: 0}))
+		.pipe(gulp.dest('./'))
 
-	conventionalChangelog options, (err, log) ->
-		fs.writeFile CHANGELOG_FILE, log
+# gulp.task 'changelog', ['bundle'],  ->
+# 	options =
+# 		repository : pkg.repository.url
+# 		version    : pkg.version
+# 		file       : CHANGELOG_FILE
+# 		log        : gutil.log
+#
+# 	conventionalChangelog options, (err, log) ->
+# 		fs.writeFile CHANGELOG_FILE, log
 
 gulp.task 'default', ['test']
 
