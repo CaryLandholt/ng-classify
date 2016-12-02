@@ -30,7 +30,7 @@ gulp.task 'bundle', ->
 
 gulp.task 'changelog', ['bundle'], ->
 	gulp.src('CHANGELOG.md')
-		.pipe(conventionalChangelog({preset: 'angular', release: 0}))
+		.pipe(conventionalChangelog({preset: 'angular'}))
 		.pipe(gulp.dest('./'))
 
 # gulp.task 'changelog', ['bundle'],  ->
