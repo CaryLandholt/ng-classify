@@ -6,6 +6,7 @@ module.exports = (formatOptions, options) ->
 		formats:
 			animation : ".{{moduleType|lowerCase}}('#{formatOptions.animation.prefix}{{className|#{formatOptions.animation.format}}}#{formatOptions.animation.suffix}', [{{parameters}}])"
 			app       : "angular.module('{{appName}}', new {{className}}())"
+			component : ".{{moduleType|lowerCase}}('#{formatOptions.component.prefix}{{className|#{formatOptions.component.format}}}#{formatOptions.component.suffix}', new {{className}}())"
 			config    : ".{{moduleType|lowerCase}}([{{parameters}}])"
 			constant  : ".{{moduleType|lowerCase}}('#{formatOptions.constant.prefix}{{className|#{formatOptions.constant.format}}}#{formatOptions.constant.suffix}', new {{className}}())"
 			controller: ".{{moduleType|lowerCase}}('#{formatOptions.controller.prefix}{{className|#{formatOptions.controller.format}}}#{formatOptions.controller.suffix}', [{{parameters}}])"

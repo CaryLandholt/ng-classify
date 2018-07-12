@@ -5,6 +5,8 @@ module.exports = (options) ->
 		animation:
 			format: 'spinalCase'
 			prefix: '.'
+		component:
+		  format: 'camelCase'
 		constant:
 			format: 'screamingSnakeCase'
 		controller:

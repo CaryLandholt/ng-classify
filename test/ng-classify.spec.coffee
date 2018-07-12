@@ -130,6 +130,30 @@ describe 'ng-classify', ->
 
 		expect(result).toEqual(expectation)
 
+	it 'should compile a component', ->
+		input = '''
+		class Modal extends Component
+			constructor: ->
+				return {
+					templateUrl: 'modal.html'
+				}
+		'''
+
+		result = ngClassify input
+
+		expectation = '''
+		class Modal
+			constructor: ->
+				return {
+					templateUrl: 'modal.html'
+				}
+
+		angular.module('app')
+		.component('modal', new Modal())
+		'''
+
+		expect(result).toEqual(expectation)
+
 	it 'should compile a Constant', ->
 		input = '''
 		class HttpStatusCodes extends Constant
